@@ -9,13 +9,13 @@ const Board = styled.div`
   height: 500px;
 `;
 
-export default function Game() {
+export default function Game({ messages, setMessages, cable }) {
   const [game, setGame] = useState(new Chess());
 
   function makeAMove(move) {
     const gameCopy = new Chess(game.fen());
-    console.log(game)
-    console.log(gameCopy)
+    console.log(game);
+    console.log(gameCopy);
     const result = gameCopy.move(move);
     setGame(gameCopy);
     return result; // null if the move was illegal, the move object if the move was legal

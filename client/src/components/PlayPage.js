@@ -7,11 +7,11 @@ const PlayArea = styled.div`
   flex: 1;
   justify-content: center;
   align-items: center;
-`
-export default function PlayPage() {
+`;
+export default function PlayPage({ messages, setMessages, cable }) {
   return (
     <PlayArea>
-      <Game />
+      <Game messages={messages} setMessages={setMessages} cable={cable}/>
       <h2>Play!</h2>
     </PlayArea>
   );
