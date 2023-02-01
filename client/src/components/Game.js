@@ -13,7 +13,6 @@ export default function Game() {
   const [game, setGame] = useState(new Chess());
 
   function makeAMove(move) {
-    // const gameCopy = { ...game };
     const gameCopy = new Chess(game.fen());
     console.log(game)
     console.log(gameCopy)
