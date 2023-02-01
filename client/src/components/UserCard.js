@@ -1,34 +1,24 @@
 import styled from "styled-components";
 
 const Card = styled.div`
+  border: 2px solid lightblue;
+  width: 300px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 `
 
-export default function UserCard({ username, gamesPlayed, gamesWon, avatar }) {
+export default function UserCard({ user }) {
   return (
     <Card>
-      <img src="http://placekitten.com/g/150/150" alt="John" />
-      <h1>John Doe</h1>
-      <p class="title">CEO & Founder, Example</p>
-      <p>Harvard University</p>
-      <a href="#">
-        <i class="fa fa-dribbble"></i>
-      </a>
-      <a href="#">
-        <i class="fa fa-twitter"></i>
-      </a>
-      <a href="#">
-        <i class="fa fa-linkedin"></i>
-      </a>
-      <a href="#">
-        <i class="fa fa-facebook"></i>
-      </a>
-      <p>
-        <button>Contact</button>
-      </p>
+      <img src={user.avatar} alt="John" />
+      <h1 style={{lineHeight: '.2'}}>{user.username}</h1>
+      <p style={{lineHeight: '.2'}}>Wins: {user.gamesWon}</p>
+      <p style={{lineHeight: '.2'}}>Games Played: {user.gamesPlayed}</p>
+      <div>
+        <button>User Page</button>
+      </div>
     </Card>
   );
 }
