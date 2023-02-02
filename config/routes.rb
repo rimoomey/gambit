@@ -4,5 +4,6 @@ Rails.application.routes.draw do
     post "add_message"
     post "change_status"
   end
+  post '/login', to: 'sessions#create'
   mount ActionCable.server => "/cable"
 end

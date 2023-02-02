@@ -9,6 +9,9 @@ gem "rails", "~> 7.0.4", ">= 7.0.4.2"
 # password encryption gem
 gem "bcrypt"
 
+# token based authentication
+gem "jwt"
+
 # use rack-cors for chess play websocketing
 gem "rack-cors"
 
