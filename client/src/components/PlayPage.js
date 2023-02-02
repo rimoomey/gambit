@@ -27,11 +27,9 @@ export default function PlayPage() {
   const cable = createConsumer("ws://localhost:4000/cable");
 
   const createSubscription = () => {
-    // setMessageSubscription(
     return cable.subscriptions.create(
       { channel: "MessagesChannel" },
       { received: (data) => handleReceivedMessage(data) }
-      // )
     );
   };
 

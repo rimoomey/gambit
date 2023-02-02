@@ -4,7 +4,8 @@ import { useState } from "react";
 import styled from "styled-components";
 
 const Board = styled.div`
-  border: 4px solid lightblue;
+  border: 6px solid var(--color--pale-pink);
+  border-radius: var(--rounded--corners);
   width: 60vh;
 `;
 

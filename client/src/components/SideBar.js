@@ -56,8 +56,6 @@ export default function SideBar({ messages }) {
         style={{
           width: "100%",
           flex: "10",
-          // backgroundColor: "var(--color--greyscale)",
-          // border: "1px solid var(--color--vivid-red)",
         }}
       >
         <div
@@ -65,7 +63,6 @@ export default function SideBar({ messages }) {
             fontSize: "1.5vw",
             paddingLeft: "5px",
             backgroundColor: "var(--color--white)",
-            // border: "1px solid var(--color--vivid-red)",
             color: "var(--color--vivid-red)",
           }}
         >
