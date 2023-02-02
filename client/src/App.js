@@ -5,7 +5,9 @@ export default function App() {
   return (
     <div>
       <NavList />
-      <Outlet />
+      <div style={{backgroundColor: 'var(--color--greyscale)'}}>
+        <Outlet />
+      </div>
     </div>
   );
 }

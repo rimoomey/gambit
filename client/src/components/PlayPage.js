@@ -1,5 +1,6 @@
 import Game from "./Game";
 import styled from "styled-components";
+import "../App.css"
 import { useState, useEffect } from "react";
 import { createConsumer } from "@rails/actioncable";
 import SideBar from "./SideBar";
@@ -15,8 +16,7 @@ const PageContent = styled.div`
 const GameContainer = styled.div`
   display: flex;
   flex-direction: column;
-  border: 2px solid lightblue;
-  flex: 10 1 0;
+  flex: 1 1 0;
   width: 70vw;
   justify-content: center;
   align-items: center;
@@ -48,10 +48,6 @@ export default function PlayPage() {
   useEffect(() => {
     const subscription = createSubscription();
   }, [messages, setMessages, cable.subscriptions]);
-
-  // useEffect(() => {
-  //   console.log(cable);
-  // }, []);
 
   return (
     <PageContent>
