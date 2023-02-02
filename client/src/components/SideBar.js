@@ -1,13 +1,13 @@
 import UserCard from "./UserCard";
 import styled from "styled-components";
 import { useState } from "react";
-// import { sendUserMessage } from "../features/users/usersApi";
 
 const SideContent = styled.div`
   border: 2px solid pink;
-  width: 300px;
+  flex: 4 1 0;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   align-items: center;
 `;
 
@@ -15,17 +15,17 @@ const userInfo = {
   username: "John Doe",
   gamesPlayed: "100",
   gamesWon: "20",
-  avatar: "http://placekitten.com/g/150/150",
+  avatar: "http://placekitten.com/g/100/100",
 };
 
 const opponentInfo = {
   username: "Enemy Doe",
   gamesPlayed: "1000",
   gamesWon: "200",
-  avatar: "http://placekitten.com/g/150/150",
+  avatar: "http://placekitten.com/g/100/100",
 };
 
-export default function SideBar({ messages, setMessages }) {
+export default function SideBar({ messages }) {
   const [play, setPlay] = useState(false);
   const [content, setContent] = useState("");
 
@@ -42,11 +42,6 @@ export default function SideBar({ messages, setMessages }) {
         message: content,
       }),
     });
-    // .then((res) => {
-    //   if (res.ok) {
-    //     setMessages([...messages, { content: res.json().content }]);
-    //   }
-    // });
   };
 
   const handleContentChange = (e) => {
@@ -54,27 +49,51 @@ export default function SideBar({ messages, setMessages }) {
   };
 
   const mapMessages = () => {
-    return messages.map((message, i) => <li key={i}>{message.content}</li>);
+    return (
+      <div style={{width: '100%', flex: '10', border: '1px solid lightblue', backgroundColor: '#E0FFFF'}}>
+        <div style={{fontSize: '1.5vw', margin: '2px', backgroundColor: 'lightblue'}}>Chat</div>
+        <div style={{width: '100%', listStyleType: 'none', display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+          {messages.map((message, i) => <li key={i + Math.random()} style={{margin: '5px', height: '1.5vw', width: '60%', fontSize:'1vw', border:'1px solid blue', backgroundColor: 'white'}}>{message.content}</li>)}
+        </div>
+      </div>
+    );
   };
 
   const isOpponentPresent = () => {
     return play ? (
       <>
+        <div style={{fontSize: '1.5vw'}}>VS</div>
         <UserCard user={opponentInfo}></UserCard>
-        <ul>{mapMessages(messages)}</ul>
       </>
+    ) : null;
+  };
+
+  const isChatOpen = () => {
+    return play ? (
+      <div style={{ width: '100%', display: 'flex', flexDirection: 'column', flex: '4 1 0'}}>
+        {mapMessages()}
+        <form onSubmit={handleNewMessage} style={{ display: 'flex', flex: '1 1 0', justifySelf: 'flex-end' }}>
+          <input
+            name="content"
+            value={content}
+            onChange={handleContentChange}
+            type="text"
+            style={{fontSize: '1.5vw', flex: '1 1 0'}}
+          />
+          <input type="submit" value="Send" style={{fontSize: '1vw', flex: '1 1 0'}}/>
+        </form>
+      </div>
     ) : (
       <div
         style={{
           display: "flex",
-          height: "300px",
-          width: "300px",
+          flex: '1 1 0',
           justifyContent: "center",
           alignItems: "center",
         }}
       >
-        <button style={{ height: "50px" }} onClick={() => setPlay(!play)}>
-          New Game
+        <button style={{ fontSize: '1vw' }} onClick={() => setPlay(!play)}>
+          Play Online
         </button>
       </div>
     );
@@ -82,17 +101,20 @@ export default function SideBar({ messages, setMessages }) {
 
   return (
     <SideContent>
-      <UserCard user={userInfo} />
-      {isOpponentPresent()}
-      <form onSubmit={handleNewMessage}>
-        <input
-          name="content"
-          value={content}
-          onChange={handleContentChange}
-          type="text"
-        />
-        <input type="submit" value="Send message" />
-      </form>
+      <div
+        style={{
+          display: "flex",
+          width: '100%',
+          flex: "3 1 0",
+          flexDirection: "row",
+          // justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <UserCard user={userInfo} />
+        {isOpponentPresent()}
+      </div>
+      {isChatOpen()}
     </SideContent>
   );
 }

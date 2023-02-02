@@ -5,8 +5,7 @@ import styled from "styled-components";
 
 const Board = styled.div`
   border: 4px solid lightblue;
-  width: 500px;
-  height: 500px;
+  width: 60vh;
 `;
 
 export default function Game({ messages, setMessages, cable }) {
@@ -14,8 +13,6 @@ export default function Game({ messages, setMessages, cable }) {
 
   function makeAMove(move) {
     const gameCopy = new Chess(game.fen());
-    console.log(game);
-    console.log(gameCopy);
     const result = gameCopy.move(move);
     setGame(gameCopy);
     return result; // null if the move was illegal, the move object if the move was legal
@@ -35,7 +32,7 @@ export default function Game({ messages, setMessages, cable }) {
 
   return (
     <Board>
-      <Chessboard position={game.fen()} onPieceDrop={onDrop} />;
+      <Chessboard position={game.fen()} onPieceDrop={onDrop} />
     </Board>
   );
 }

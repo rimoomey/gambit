@@ -1,10 +1,12 @@
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 
-const Header = styled.span`
+const Header = styled.div`
   display: flex;
-  padding: 15px;
-  border: 1px solid blue;
+  height: 10vh;
+  width: 100%;
+  max-width: 100%;
+  /* border: 1px solid blue; */
 `
 
 const Logo = styled.div`
@@ -18,7 +20,7 @@ const Logo = styled.div`
 const Navigation = styled.ul`
   list-style-type: none;
   display: flex;
-  flex: 3 0 0;
+  flex: 1 1 0;
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
@@ -37,37 +39,39 @@ export default function NavList() {
       <Logo>
         <div>Chess Player</div>
       </Logo>
-      <Navigation>
-        <li>
-          <NavLink
-            to="/play"
-            style={({ isActive }) => (isActive ? activeStyle : undefined)}
-          >
-            Play
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            to="/friends"
-            style={({ isActive }) => (isActive ? activeStyle : undefined)}
-          >Friends</NavLink>
-        </li>
-        <li>
-          <NavLink to="/previous-games" style={({ isActive }) =>
-              isActive ? activeStyle : undefined
-            }>Game History</NavLink>
-        </li>
-        <li>
-          <NavLink to="/account" style={({ isActive }) =>
-              isActive ? activeStyle : undefined
-            }>Account</NavLink>
-        </li>
-        <li>
-          <NavLink to="/login" style={({ isActive }) =>
-              isActive ? activeStyle : undefined
-            }>Login</NavLink>
-        </li>
-      </Navigation>
+      <div style={{display: 'flex', flexDirection: 'column', flex: '3 1 0'}}>
+        <Navigation>
+          <li>
+            <NavLink
+              to="/play"
+              style={({ isActive }) => (isActive ? activeStyle : undefined)}
+            >
+              Play
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/friends"
+              style={({ isActive }) => (isActive ? activeStyle : undefined)}
+            >Friends</NavLink>
+          </li>
+          <li>
+            <NavLink to="/previous-games" style={({ isActive }) =>
+                isActive ? activeStyle : undefined
+              }>Game History</NavLink>
+          </li>
+          <li>
+            <NavLink to="/account" style={({ isActive }) =>
+                isActive ? activeStyle : undefined
+              }>Account</NavLink>
+          </li>
+          <li>
+            <NavLink to="/login" style={({ isActive }) =>
+                isActive ? activeStyle : undefined
+              }>Login</NavLink>
+          </li>
+        </Navigation>
+      </div>
     </Header>
   );
 }
