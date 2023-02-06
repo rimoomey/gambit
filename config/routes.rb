@@ -1,9 +1,8 @@
 Rails.application.routes.draw do
-  resources :messages, only: %i[index]
-  resources :users, only: %i[index create] do
-    post "add_message"
-    post "change_status"
+  resources :users, only: %i[index create]
+  resources :games, only: %i[index create] do
+    post "/add_move", to: "games#add_move"
   end
-  post '/login', to: 'sessions#create'
+  post "/login", to: "sessions#create"
   mount ActionCable.server => "/cable"
 end

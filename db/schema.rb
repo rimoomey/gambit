@@ -10,21 +10,37 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_01_155319) do
-  create_table "messages", force: :cascade do |t|
-    t.string "content"
-    t.integer "user_id"
+ActiveRecord::Schema[7.0].define(version: 2023_02_06_191708) do
+  create_table "games", force: :cascade do |t|
+    t.integer "white_user_id"
+    t.integer "black_user_id"
+    t.string "fen"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_messages_on_user_id"
+    t.index ["black_user_id"], name: "index_games_on_black_user_id"
+    t.index ["white_user_id"], name: "index_games_on_white_user_id"
+  end
+
+  create_table "moves", force: :cascade do |t|
+    t.string "to"
+    t.string "from"
+    t.string "color"
+    t.string "piece"
+    t.integer "game_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["game_id"], name: "index_moves_on_game_id"
   end
 
   create_table "users", force: :cascade do |t|
     t.string "username"
+    t.string "avatar"
     t.string "password_digest"
     t.string "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "games", "users", column: "black_user_id"
+  add_foreign_key "games", "users", column: "white_user_id"
 end

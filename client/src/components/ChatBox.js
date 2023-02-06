@@ -1,72 +1,57 @@
 import { useState } from "react";
 
-export default function ChatBox({ messages }) {
+export default function ChatBox() {
   const [content, setContent] = useState("");
   const handleContentChange = (e) => {
     setContent(e.target.value);
   };
 
-  const handleNewMessage = (e) => {
-    e.preventDefault();
-
-    fetch(`http://localhost:4000/users/${1}/add_message`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        user_id: 1,
-        message: content,
-      }),
-    });
-  };
-
-  const mapMessages = (messages) => {
-    return (
-      <div
-        style={{
-          width: "100%",
-          flex: "10",
-        }}
-      >
-        <div
-          style={{
-            fontSize: "1.5vw",
-            paddingLeft: "5px",
-            backgroundColor: "var(--color--white)",
-            color: "var(--color--vivid-red)",
-          }}
-        >
-          <span>chat</span>
-        </div>
-        <div
-          style={{
-            width: "100%",
-            listStyleType: "none",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-          }}
-        >
-          {messages.map((message, i) => (
-            <li
-              key={i + Math.random()}
-              style={{
-                margin: "5px",
-                height: "1.5vw",
-                width: "60%",
-                fontSize: "1vw",
-                border: "1px solid var(--color--vivid-red)",
-                backgroundColor: "white",
-              }}
-            >
-              {message.content}
-            </li>
-          ))}
-        </div>
-      </div>
-    );
-  };
+  // const mapMessages = (messages) => {
+  //   return (
+  //     <div
+  //       style={{
+  //         width: "100%",
+  //         flex: "10",
+  //       }}
+  //     >
+  //       <div
+  //         style={{
+  //           fontSize: "1.5vw",
+  //           paddingLeft: "5px",
+  //           backgroundColor: "var(--color--white)",
+  //           color: "var(--color--vivid-red)",
+  //         }}
+  //       >
+  //         <span>chat</span>
+  //       </div>
+  //       <div
+  //         style={{
+  //           width: "100%",
+  //           listStyleType: "none",
+  //           display: "flex",
+  //           flexDirection: "column",
+  //           alignItems: "center",
+  //         }}
+  //       >
+  //         {messages.map((message, i) => (
+  //           <li
+  //             key={i + Math.random()}
+  //             style={{
+  //               margin: "5px",
+  //               height: "1.5vw",
+  //               width: "60%",
+  //               fontSize: "1vw",
+  //               border: "1px solid var(--color--vivid-red)",
+  //               backgroundColor: "white",
+  //             }}
+  //           >
+  //             {message.content}
+  //           </li>
+  //         ))}
+  //       </div>
+  //     </div>
+  //   );
+  // };
 
   return (
     <div
@@ -78,8 +63,8 @@ export default function ChatBox({ messages }) {
         border: "1px solid var(--color--vivid-red)",
       }}
     >
-      {mapMessages(messages)}
-      <form onSubmit={handleNewMessage}>
+      {/* {mapMessages(messages)} */}
+      <form>
         <div
           style={{
             display: "flex",
@@ -100,7 +85,6 @@ export default function ChatBox({ messages }) {
           />
           <button
             style={{ fontSize: "1vw", width: "20%", borderRadius: "7px" }}
-            onClick={handleNewMessage}
           >
             Send
           </button>

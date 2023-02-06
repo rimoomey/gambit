@@ -1,23 +1,16 @@
 import NavList from "./components/NavList";
 import { Outlet } from "react-router-dom";
+import { useState, useEffect } from "react";
 
 export default function App() {
-  fetch("http://localhost:4000/login", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    credentials: "include",
-    body: JSON.stringify({
-      username: "rimon",
-      password: "rimon",
-    }),
-  }).then((res) => res.json());
+  const [user, setUser] = useState({});
+
+  console.log(user)
   return (
     <div>
       <NavList />
       <div style={{ backgroundColor: "var(--color--greyscale)" }}>
-        <Outlet />
+        <Outlet context={[user, setUser]} />
       </div>
     </div>
   );

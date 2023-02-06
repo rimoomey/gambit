@@ -11,7 +11,7 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    session.delete :user_id
+    cookies.signed[:jwt] = nil
     head :no_content
   end
 
