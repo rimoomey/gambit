@@ -5,6 +5,7 @@ import '../App.css'
 
 const Header = styled.div`
   display: flex;
+  flex: 0 0 auto;
   height: 10vh;
   width: 100%;
   max-width: 100%;
@@ -44,6 +45,7 @@ export default function NavList() {
         <Navigation>
           <li>
             <StyledLink
+              className="main-nav-link"
               to="/play"
               style={{textDecoration: 'none'}}
             >
@@ -52,18 +54,16 @@ export default function NavList() {
           </li>
           <li>
             <NavLink
+              className="main-nav-link"
               to="/friends"
               style={{textDecoration: 'none'}}
             >Friends</NavLink>
           </li>
           <li>
-            <NavLink to="/previous-games" style={{textDecoration: 'none'}}>Game History</NavLink>
+            <NavLink className="main-nav-link" to="/previous-games" style={{textDecoration: 'none'}}>Game History</NavLink>
           </li>
           <li>
-            <NavLink to="/account" style={{textDecoration: 'none'}}>Account</NavLink>
-          </li>
-          <li>
-            <NavLink to="/login" style={{textDecoration: 'none'}}>Login</NavLink>
+            <NavLink className="main-nav-link" to="/account" style={{textDecoration: 'none'}}>Account</NavLink>
           </li>
         </Navigation>
       </div>

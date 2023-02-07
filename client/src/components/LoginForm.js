@@ -1,8 +1,6 @@
 import { useState } from "react";
-import { useOutletContext } from "react-router-dom";
 
-export default function LoginPage() {
-  const [user, setUser] = useOutletContext();
+export default function LoginForm({setUser}) {
   const [formData, setFormData] = useState({
     username: "",
     password: "",

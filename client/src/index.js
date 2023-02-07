@@ -7,7 +7,7 @@ import App from "./App";
 import AccountInformationPage from "./components/AccountInformationPage";
 import FriendsPage from "./components/FriendsPage";
 import GameHistoryPage from "./components/GameHistoryPage";
-import LoginPage from "./components/LoginPage";
+import LoginForm from "./components/LoginForm";
 import PlayPage from "./components/PlayPage";
 import ErrorPage from "./ErrorPage";
 import reportWebVitals from "./reportWebVitals";
@@ -21,10 +21,6 @@ const router = createBrowserRouter([
       {
         path: "/play",
         element: <PlayPage />,
-      },
-      {
-        path: "/login",
-        element: <LoginPage />,
       },
       {
         path: "/friends",

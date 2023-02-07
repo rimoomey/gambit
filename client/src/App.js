@@ -1,17 +1,17 @@
 import NavList from "./components/NavList";
 import { Outlet } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import SignInModal from "./components/SignInModal";
 
 export default function App() {
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState(null);
 
-  console.log(user)
+  console.log(user);
   return (
-    <div>
+    <div style={{ display: "flex", flexDirection: "column", height: "100vh" }}>
       <NavList />
-      <div style={{ backgroundColor: "var(--color--greyscale)" }}>
-        <Outlet context={[user, setUser]} />
-      </div>
+      {user ? <Outlet context={[user, setUser]} /> : null }
+      <SignInModal user={user} setUser={setUser}/>
     </div>
   );
 }
