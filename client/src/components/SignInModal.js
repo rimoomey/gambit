@@ -1,25 +1,7 @@
-import { NavLink as Link } from "react-router-dom";
 import { useState } from "react";
 import LoginForm from "./LoginForm";
 import styled from "styled-components";
 import "../App.css";
-
-const modalStyle = {
-  content: {
-    display: "flex",
-    justifyContent: "space-evenly",
-    alignItems: "center",
-    boxShadow: "rgba(100, 100, 111, 0.3) 0px 7px 29px 0px",
-    backgroundColor: "white",
-    border: "2px solid rgb(240, 240, 240)",
-    borderRadius: "12px",
-    position: "absolute",
-    width: "250px",
-    top: "70px",
-    height: "fit-content",
-    left: "calc(50% - 125px)",
-  },
-};
 
 const PageContainer = styled.div`
   display: flex;
@@ -85,10 +67,10 @@ export default function SignInModal({ user, setUser }) {
               You must be signed in to view this page!
             </div>
             <div>
-              <button value="login" className="modal-button" onClick={handleClick}>
+              <button value="login" className="notice-button" onClick={handleClick}>
                 Sign In
               </button>
-              <button value="signup" className="modal-button" onClick={handleClick}>
+              <button value="signup" className="notice-button" onClick={handleClick}>
                 Sign Up
               </button>
             </div>

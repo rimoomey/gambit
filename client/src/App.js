@@ -6,7 +6,6 @@ import SignInModal from "./components/SignInModal";
 export default function App() {
   const [user, setUser] = useState(null);
 
-  console.log(user);
   return (
     <div style={{ display: "flex", flexDirection: "column", height: "100vh" }}>
       <NavList />

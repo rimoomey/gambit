@@ -3,6 +3,7 @@ class MatchMakingChannel < ApplicationCable::Channel
 
   def subscribed
     stream_from "MatchMakingChannel"
+    stream_from "matchmaking_#{params[:user_id]}"
   end
 
   def joined
@@ -16,7 +17,7 @@ class MatchMakingChannel < ApplicationCable::Channel
       game = Game.create!(white_user: @@matches.first, black_user: @@matches.last)
       ActionCable.server.broadcast "MatchMakingChannel", {game: game, white_user: white_user_info(game), black_user: black_user_info(game)}
     else
-      ActionCable.server.broadcast "MatchMakingChannel", {message: "waiting for game"}
+      ActionCable.server.broadcast "matchmaking_#{params[:user_id]}", {message: "waiting for game"}
     end
   end
 

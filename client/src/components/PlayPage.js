@@ -1,30 +1,35 @@
-import Game from "./Game";
 import { Chess } from "chess.js";
 import styled from "styled-components";
 import "../App.css";
 import { useOutletContext } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { createConsumer } from "@rails/actioncable";
-import SideBar from "./SideBar";
+import GameAndSidebar from "./GameAndSidebar";
 
-const PageContent = styled.div`
+const PageContainer = styled.div`
   display: flex;
   flex-direction: row;
-  width: 100%;
-  max-width: 100%;
-  height: 80vh;
-`;
-
-const GameContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  flex: 1 1 0;
-  width: 70vw;
+  flex: 1 0 auto;
+  background-color: var(--color--greyscale);
   justify-content: center;
   align-items: center;
 `;
+
+const FloatingNotice = styled.div`
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color--vivid-red);
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  box-shadow: rgba(100, 100, 111, 0.3) 0px 7px 29px 0px;
+  border-radius: 10px;
+  width: 500px;
+  height: 500px;
+`;
+
 export default function PlayPage() {
-  const [message, setMessage] = useState("");
+  const [matchStatus, setMatchStatus] = useState("");
   const [white, setWhite] = useState({});
   const [black, setBlack] = useState({});
 
@@ -32,6 +37,7 @@ export default function PlayPage() {
     gameInfo: null,
     board: null,
   });
+
   const [channel, setChannel] = useState(null);
   const [user] = useOutletContext();
 
@@ -42,28 +48,22 @@ export default function PlayPage() {
       { channel: "MatchMakingChannel", user_id: user.id },
       {
         connected: () => {
-          setMessage("joined MatchMaking");
+          setMatchStatus("joined MatchMaking");
         },
         received: (data) => {
           if (data.message) {
-            setMessage(data.message);
+            setMatchStatus(data.message);
           }
 
           if (data.game) {
-            setMessage(
-              "Game #" +
-                data.game.id +
-                " White User ID" +
-                data.game.white_user_id +
-                " Black User ID" +
-                data.game.black_user_id
-            );
+            console.log("fired received");
             setWhite(data.white_user);
             setBlack(data.black_user);
             setGame({
               gameInfo: data.game,
               board: new Chess(),
             });
+            setMatchStatus("playing");
           }
         },
         joined: () => {
@@ -83,23 +83,29 @@ export default function PlayPage() {
     createSubscription(cable);
   }, []);
 
-  useEffect(() => {
-    console.log(message);
-  }, [message]);
-
   return (
-    <PageContent>
+    <PageContainer>
       {game.gameInfo ? (
-        <GameContainer>
-          <Game game={game} setGame={setGame} cable={cable} user={user} />
-        </GameContainer>
-      ) : null}
-      <SideBar
-        cable={cable}
-        handleJoined={handleJoined}
-        white={white}
-        black={black}
-      />
-    </PageContent>
+        <GameAndSidebar props={[game, setGame, user, cable, white, black]} />
+      ) : (
+        <FloatingNotice>
+          {matchStatus == "waiting for game" ? (
+            <div style={{ color: "white", margin: "5px", fontSize: "1.5vw" }}>
+              Searching for an opponent...
+            </div>
+          ) : (
+            <button
+              style={{ width: "20%", fontSize: "1vw" }}
+              onClick={() => {
+                handleJoined();
+              }}
+              className="notice-button"
+            >
+              Play Online
+            </button>
+          )}
+        </FloatingNotice>
+      )}
+    </PageContainer>
   );
 }
