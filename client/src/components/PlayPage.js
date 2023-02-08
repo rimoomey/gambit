@@ -7,9 +7,9 @@ import { createConsumer } from "@rails/actioncable";
 import GameAndSidebar from "./GameAndSidebar";
 
 const PageContainer = styled.div`
+  height: 95%;
   display: flex;
-  flex-direction: row;
-  flex: 1 0 auto;
+  width: 100%;
   background-color: var(--color--greyscale);
   justify-content: center;
   align-items: center;
@@ -90,7 +90,7 @@ export default function PlayPage() {
       ) : (
         <FloatingNotice>
           {matchStatus == "waiting for game" ? (
-            <div style={{ color: "white", margin: "5px", fontSize: "1.5vw" }}>
+            <div style={{ color: "var(--color--white)", margin: "5px", fontSize: "1.5vw" }}>
               Searching for an opponent...
             </div>
           ) : (

@@ -6,8 +6,7 @@ import '../App.css'
 const Header = styled.div`
   display: flex;
   flex: 0 0 auto;
-  height: 10vh;
-  width: 100%;
+  height: 5%;
   max-width: 100%;
   color: var(--color--vivid-red);
 `
@@ -17,7 +16,7 @@ const Logo = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 3vw;
+  font-size: 3vh;
 `
 const StyledLink = styled(NavLink)`
   text-decoration: none;

@@ -1,15 +1,11 @@
 import { Chessboard } from "react-chessboard";
 import { Chess } from "chess.js";
-import { useState, useEffect, useRef } from "react";
+import { useEffect } from "react";
 import "../App.css";
 import styled from "styled-components";
 
 const Board = styled.div`
   box-sizing: border-box;
-  border: 6px solid var(--color--pale-pink);
-  border-radius: var(--rounded--corners);
-  margin: 6px 3px 6px 6px;
-  flex: 0 1 auto;
   width: 80%;
 `;
 
@@ -18,20 +14,21 @@ export default function Game({
   setGame,
   cable,
   user,
-  setSidebarHeight,
   setMoveList,
   white_player,
-  black_player
+  black_player,
+  setTurnNumber,
 }) {
-
   const updateMoveList = (moves) => {
     const newList = [
-      "White: " +
-        white_player.username +
-        ",Black: " +
-        black_player.username,
-      ...moves
+      "White: " + white_player.username + ",Black: " + black_player.username,
+      ...moves,
     ];
+    if (moves[moves.length - 1].color === "w") {
+      setTurnNumber(1);
+    } else {
+      setTurnNumber(0);
+    }
     setMoveList(newList);
   };
 
@@ -57,31 +54,8 @@ export default function Game({
     );
   };
 
-  const boardRef = useRef();
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-
-  const setSidebarWidth = () => {
-    const boardWidth = boardRef.current.clientWidth;
-    setSidebarHeight(boardWidth + 12);
-  };
-
   useEffect(() => {
     createSubscription();
-  }, []);
-
-  useEffect(() => {
-    setSidebarWidth();
-  }, [windowWidth]);
-
-  const setWindowDimensions = () => {
-    setWindowWidth(window.innerWidth);
-  };
-
-  useEffect(() => {
-    window.addEventListener("resize", setWindowDimensions);
-    return () => {
-      window.removeEventListener("resize", setWindowDimensions);
-    };
   }, []);
 
   function makeAMove(move) {
@@ -116,7 +90,7 @@ export default function Game({
   }
 
   return (
-    <Board ref={boardRef}>
+    <Board>
       <Chessboard position={game.board.fen()} onPieceDrop={onDrop} />
     </Board>
   );

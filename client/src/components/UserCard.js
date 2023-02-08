@@ -3,13 +3,13 @@ import "../App.css"
 
 const Card = styled.div`
   display: flex;
-  width: 30%;
+  width: 40%;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  border: 1px solid var(--color--light-green-cyan);
+  background-color: var(--color--white);
   margin: 2px;
-  padding: 3px;
+  padding: 2px;
 `
 
 export default function UserCard({ user }) {
@@ -19,9 +19,7 @@ export default function UserCard({ user }) {
       <span style={{fontSize: '.75vw'}}>{user.username}</span>
       <div style={{fontSize: '.5vw'}}>Wins: {user.gamesWon}</div>
       <div style={{fontSize: '.5vw'}}>Games Played: {user.gamesPlayed}</div>
-      <div>
         <button style={{fontSize: '.5vw'}}>User Page</button>
-      </div>
     </Card>
   );
 }

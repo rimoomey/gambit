@@ -7,21 +7,22 @@ ul {
   margin-block-end: 0px;
   height: 100%;
   width: 100%;
+  list-style-type: none;
   padding-inline-start: 0px;
 }
 
 .move-list::-webkit-scrollbar {
-  width: 5px;
+  width: 2px;
 }
 
 /* Track */
 .move-list::-webkit-scrollbar-track {
-  background: var(--color--greyscale); 
+  background: var(--color--white); 
 }
  
 /* Handle */
 .move-list::-webkit-scrollbar-thumb {
-  background: #888; 
+  background: var(--color--pale-pink); 
 }
 
 /* Handle on hover */
@@ -30,7 +31,7 @@ ul {
 }
 
 .main-nav-link {
-  font-size: 1vw;
+  font-size: 1vh;
 }
 
 .main-nav-link:link, .main-nav-link:visited {
@@ -52,7 +53,7 @@ ul {
   color: var(--color--white);
   border-radius: 3px;
   border: none;
-  font-size: 1vw;
+  font-size: 1vh;
 }
 .notice-button:hover {
   padding: 4px 9px 4px 9px;
