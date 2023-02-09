@@ -1,12 +1,15 @@
 import { Chessboard } from "react-chessboard";
 import { Chess } from "chess.js";
 import { useEffect } from "react";
+import { toast } from "react-toastify";
 import "../App.css";
 import styled from "styled-components";
 
 const Board = styled.div`
   box-sizing: border-box;
-  width: 80%;
+  border-right: 3px solid var(--color--vivid-red);
+  padding-right: 3px;
+  width: 75%;
 `;
 
 export default function Game({
@@ -49,6 +52,7 @@ export default function Game({
             board: gameCopy,
           });
           updateMoveList(data.moves);
+          console.log(game.board.turn());
         },
       }
     );
@@ -80,12 +84,24 @@ export default function Game({
   }
 
   function onDrop(sourceSquare, targetSquare) {
-    makeAMove({
-      from: sourceSquare,
-      to: targetSquare,
-      promotion: "q", // always promote to a queen for example simplicity
-    });
-
+    console.log(game.gameInfo)
+    console.log(game.board.turn() === "w")
+    console.log(user.id === game.gameInfo.white_user_id)
+    if (
+      (game.board.turn() === "w" &&
+        user.id === game.gameInfo.white_user_id) ||
+      (game.board.turn() === "b" && user.id === game.gameInfo.black_user_id)
+    ) {
+      makeAMove({
+        from: sourceSquare,
+        to: targetSquare,
+        promotion: "q", // always promote to a queen for example simplicity
+      });
+    } else {
+      toast.error("It's not your turn yet.", {
+        position: toast.POSITION.TOP_CENTER
+      });
+    }
     return false;
   }
 

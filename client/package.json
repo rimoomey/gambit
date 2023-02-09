@@ -8,16 +8,21 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "actioncable": "^5.2.8-1",
-    "chess.js": "^1.0.0-beta.2",
+    "babel": "^6.23.0",
+    "chess.js": "^1.0.0-beta.3",
     "normalize.css": "^8.0.1",
     "react": "^18.2.0",
     "react-chessboard": "^2.0.8",
     "react-dom": "^18.2.0",
+    "react-is": "^18.2.0",
     "react-modal": "^3.16.1",
     "react-router-dom": "^6.8.0",
     "react-scripts": "5.0.1",
+    "react-toastify": "^9.1.1",
     "styled-components": "^5.3.6",
-    "web-vitals": "^2.1.4"
+    "typescript": "^4.9.5",
+    "web-vitals": "^2.1.4",
+    "yarn": "^1.22.19"
   },
   "scripts": {
     "start": "react-scripts start",

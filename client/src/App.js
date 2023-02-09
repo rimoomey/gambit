@@ -9,8 +9,8 @@ export default function App() {
   return (
     <div style={{ display: "flex", flexDirection: "column", height: "100vh" }}>
       <NavList />
-      {user ? <Outlet context={[user, setUser]} /> : null }
-      <SignInModal user={user} setUser={setUser}/>
+      {user ? <Outlet context={[user, setUser]} /> : null}
+      <SignInModal user={user} setUser={setUser} />
     </div>
   );
 }

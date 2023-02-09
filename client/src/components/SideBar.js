@@ -6,7 +6,8 @@ import "../App.css";
 const SideContent = styled.div`
   box-sizing: border-box;
   height: 100%;
-  width: 20%;
+  width: 25%;
+  padding-left: 3px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -20,16 +21,22 @@ export default function SideBar({ white, black, sidebarHeight, moveList }) {
         <div
           style={{
             display: "flex",
-            height: "100%",
             width: "100%",
             flexDirection: "row",
-            justifyContent: "center",
+            justifyContent: "space-around",
             backgroundColor: "var(--color--greyscale)",
             alignItems: "center",
           }}
         >
           <UserCard user={white}></UserCard>
-          <div style={{ fontSize: "1.5vw" }}>VS</div>
+          <div
+            style={{
+              fontSize: "1vw",
+              color: "var(--color--white)",
+            }}
+          >
+            VS
+          </div>
           <UserCard user={black}></UserCard>
         </div>
         <ChatBox moveList={moveList} />

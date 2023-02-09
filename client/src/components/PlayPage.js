@@ -7,7 +7,7 @@ import { createConsumer } from "@rails/actioncable";
 import GameAndSidebar from "./GameAndSidebar";
 
 const PageContainer = styled.div`
-  height: 95%;
+  height: 90%;
   display: flex;
   width: 100%;
   background-color: var(--color--greyscale);

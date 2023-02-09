@@ -50,7 +50,7 @@ export default function ChatBox({ moveList }) {
           break;
       }
       return (
-        <span key={i + Math.random()} style={{ display: "inline-block" }}>
+        <span key="4" style={{ display: "inline-block" }}>
           {color + " " + piece + " | " + move.from + " -> " + move.to}
         </span>
       );
@@ -63,7 +63,6 @@ export default function ChatBox({ moveList }) {
         className="move-list"
         style={{
           width: "100%",
-          flex: "10",
           display: "flex",
           flexDirection: "column",
           justifyContent: "flex-start",
@@ -71,7 +70,7 @@ export default function ChatBox({ moveList }) {
           overflowX: "hidden",
         }}
       >
-        <ul>
+        <ul style={{height: "100%"}}>
           {moveList.length
             ? [...moveList].reverse().map((move, i) => (
                 <>
@@ -85,7 +84,8 @@ export default function ChatBox({ moveList }) {
                   >
                     {isFirstMove(move, i)}
                   </li>
-                  <hr key={i + 1 + Math.random()}
+                  <hr
+                    key={i + 1 + Math.random()}
                     style={{
                       margin: "0",
                       borderTop: "1px dotted var(--color--white)",

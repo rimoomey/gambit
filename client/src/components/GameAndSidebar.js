@@ -6,7 +6,7 @@ import styled from "styled-components";
 const ColumnDiv = styled.div`
   display: flex;
   flex-direction: column;
-  width: 80vw;
+  max-width: 90vh;
   max-height: 90%;
   background-color: var(--color--greyscale);
 `;
@@ -17,8 +17,9 @@ const RowDiv = styled.div`
   width: 100%;
   display: flex;
   flex-direction: row;
-  border: 6px solid var(--color--pale-pink);
+  border: 3px solid var(--color--vivid-red);
   border-radius: var(--rounded--corners);
+  padding: 2px;
 `;
 
 const PlayerTurnDiv = styled.div`
@@ -41,16 +42,34 @@ export default function GameAndSidebar({ props }) {
   return (
     <ColumnDiv>
       <PlayerTurnDiv>
-        <div style={{ width: "80%", display: "flex", justifyContent: "center"}}>
-          <span style={{ fontSize: "1.5vh", color: "var(--color--white)" }}>
-            {`Current Player Turn: ${
-              turnNumber == 0
-                ? white_player.username
-                : black_player.username
-            }`}
+        <div
+          style={{ paddingRight: "6px", width: "75%", display: "flex", justifyContent: "center" }}
+        >
+          <span
+            style={{
+              fontSize: "1.5vh",
+              margin: "3px",
+              padding: "3px",
+              border:
+                turnNumber == 0
+                  ? "1px solid var(--color--white)"
+                  : "1px solid var(--color--greyscale)",
+              color:
+                turnNumber == 0
+                  ? "var(--color--white)"
+                  : "var(--color--greyscale)",
+              backgroundColor:
+                turnNumber == 1
+                  ? "var(--color--white)"
+                  : "var(--color--greyscale)",
+            }}
+          >
+            {`${
+              turnNumber == 0 ? white_player.username : black_player.username
+            }'s turn`}
           </span>
         </div>
-        <div style={{ width: "20%" }}></div>
+        <div style={{ paddingLeft: "3px", width: "25%" }}></div>
       </PlayerTurnDiv>
       <RowDiv>
         <Game

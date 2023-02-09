@@ -12,7 +12,7 @@ ul {
 }
 
 .move-list::-webkit-scrollbar {
-  width: 2px;
+  width: 0px;
 }
 
 /* Track */
@@ -30,8 +30,22 @@ ul {
   background: #555; 
 }
 
+.home-link {
+  font-size: 8vh;
+}
+
+.home-link:link, .home-link:visited {
+  text-decoration: none;
+  color: var(--color--vivid-red)
+}
+
+.home-link:hover {
+  text-decoration: underline;
+  color: var(--color--greyscale)
+}
+
 .main-nav-link {
-  font-size: 1vh;
+  font-size: 3vh;
 }
 
 .main-nav-link:link, .main-nav-link:visited {
@@ -40,11 +54,11 @@ ul {
 }
 
 .main-nav-link:hover {
-  text-decoration: none;
+  text-decoration: underline;
   color: var(--color--greyscale)
 }
 
-.notice-button {
+button.notice-button {
   box-sizing: border-box;
   text-decoration: none;
   margin: 5px;
@@ -53,9 +67,9 @@ ul {
   color: var(--color--white);
   border-radius: 3px;
   border: none;
-  font-size: 1vh;
+  font-size: 2vh;
 }
-.notice-button:hover {
+button.notice-button:hover {
   padding: 4px 9px 4px 9px;
   border: 1px solid var(--color--cyan-bluish-gray);
 }
