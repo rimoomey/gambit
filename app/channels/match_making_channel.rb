@@ -23,12 +23,12 @@ class MatchMakingChannel < ApplicationCable::Channel
 
   def white_user_info(game)
     user = User.find_by(id: game.white_user_id)
-    {username: user.username, avatar: user.avatar}
+    {id: user.id, username: user.username, avatar: user.avatar}
   end
 
   def black_user_info(game)
     user = User.find_by(id: game.black_user_id)
-    {username: user.username, avatar: user.avatar}
+    {id: user.id, username: user.username, avatar: user.avatar}
   end
 
   def unsubscribed

@@ -1,6 +1,8 @@
+import { CableContext } from "./PlayPage";
 import { Chessboard } from "react-chessboard";
 import { Chess } from "chess.js";
-import { useEffect } from "react";
+import { useEffect, useState, useContext } from "react";
+import  { useOutletContext } from "react-router-dom";
 import { toast } from "react-toastify";
 import "../App.css";
 import styled from "styled-components";
@@ -12,19 +14,20 @@ const Board = styled.div`
   width: 75%;
 `;
 
-export default function Game({
-  game,
-  setGame,
-  cable,
-  user,
-  setMoveList,
-  white_player,
-  black_player,
-  setTurnNumber,
-}) {
+export default function Game({ gameInfo, setMoveList, setTurnNumber }) {
+  const { gameData, whiteUser, blackUser } = gameInfo;
+  const { cable } = useContext(CableContext);
+  const { user } = useOutletContext();
+
+  //speed up rerendering
+  const [game, setGame] = useState({
+    gameData: null,
+    board: null,
+  });
+
   const updateMoveList = (moves) => {
     const newList = [
-      "White: " + white_player.username + ",Black: " + black_player.username,
+      "White: " + whiteUser.username + ",Black: " + blackUser.username,
       ...moves,
     ];
     if (moves[moves.length - 1].color === "w") {
@@ -41,18 +44,17 @@ export default function Game({
       {
         connected: () => {
           setGame({
-            gameInfo: game.gameInfo,
+            gameData: gameData,
             board: new Chess(),
           });
         },
         received: (data) => {
-          const gameCopy = new Chess(data.fen);
+          const gameBoardCopy = new Chess(data.fen);
           setGame({
-            gameInfo: game.gameInfo,
-            board: gameCopy,
+            gameData: game.gameData,
+            board: gameBoardCopy,
           });
           updateMoveList(data.moves);
-          console.log(game.board.turn());
         },
       }
     );
@@ -63,16 +65,16 @@ export default function Game({
   }, []);
 
   function makeAMove(move) {
-    const gameCopy = new Chess(game.board.fen());
-    const result = gameCopy.move(move);
+    const gameBoardCopy = new Chess(game.board.fen());
+    const result = gameBoardCopy.move(move);
     if (result) {
-      fetch(`http://localhost:4000/games/${game.gameInfo.id}/add_move`, {
+      fetch(`http://localhost:4000/games/${game.gameData.id}/add_move`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          fen: gameCopy.fen(),
+          fen: gameBoardCopy.fen(),
           to: result.to,
           from: result.from,
           color: result.color,
@@ -84,13 +86,9 @@ export default function Game({
   }
 
   function onDrop(sourceSquare, targetSquare) {
-    console.log(game.gameInfo)
-    console.log(game.board.turn() === "w")
-    console.log(user.id === game.gameInfo.white_user_id)
     if (
-      (game.board.turn() === "w" &&
-        user.id === game.gameInfo.white_user_id) ||
-      (game.board.turn() === "b" && user.id === game.gameInfo.black_user_id)
+      (game.board.turn() === "w" && user.id === whiteUser.id) ||
+      (game.board.turn() === "b" && user.id === blackUser.id)
     ) {
       makeAMove({
         from: sourceSquare,
@@ -99,7 +97,7 @@ export default function Game({
       });
     } else {
       toast.error("It's not your turn yet.", {
-        position: toast.POSITION.TOP_CENTER
+        position: toast.POSITION.TOP_CENTER,
       });
     }
     return false;
@@ -107,7 +105,7 @@ export default function Game({
 
   return (
     <Board>
-      <Chessboard position={game.board.fen()} onPieceDrop={onDrop} />
+      { game.board ? <Chessboard position={game.board.fen()} onPieceDrop={onDrop} /> : null }
     </Board>
   );
 }

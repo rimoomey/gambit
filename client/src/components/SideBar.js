@@ -14,7 +14,7 @@ const SideContent = styled.div`
   align-items: center;
 `;
 
-export default function SideBar({ white, black, sidebarHeight, moveList }) {
+export default function SideBar({ white, black, moveList }) {
   const MessageContainer = () => {
     return (
       <>

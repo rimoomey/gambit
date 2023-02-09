@@ -4,12 +4,15 @@ import "normalize.css";
 import "../App.css";
 
 const Header = styled.div`
+  position: fixed;
+  top: 0;
   display: flex;
   flex-direction: row;
-  flex: 1 0 auto;
-  max-width: 100%;
+  width: 100%;
   padding: 2vh;
+  align-items: center;
   color: var(--color--vivid-red);
+  background-color: var(--color--white);
 `;
 
 const Logo = styled(NavLink)`
@@ -17,7 +20,6 @@ const Logo = styled(NavLink)`
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 8vh;
 `;
 
 const Navigation = styled.ul`
@@ -46,7 +48,7 @@ export default function NavList() {
           </NavLink>
         </li>
       </Navigation>
-      <Logo className="home-link" to="/">
+      <Logo id="home-link" to="/">
         gambit
       </Logo>
       <Navigation>

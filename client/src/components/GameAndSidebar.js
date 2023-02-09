@@ -32,18 +32,25 @@ const PlayerTurnDiv = styled.div`
   align-items: center;
 `;
 
-export default function GameAndSidebar({ props }) {
+export default function GameAndSidebar({ gameInfo }) {
+  const { whiteUser: white, blackUser: black } = gameInfo;
+  const whiteUsername = white.username;
+  const blackUsername = black.username;
   const [turnNumber, setTurnNumber] = useState(0);
-  const [game, setGame, user, cable, white_player, black_player] = props;
   const [moveList, setMoveList] = useState([
-    "White: " + white_player.username + ",Black: " + black_player.username,
+    "White: " + whiteUsername + ",Black: " + blackUsername,
   ]);
 
   return (
     <ColumnDiv>
       <PlayerTurnDiv>
         <div
-          style={{ paddingRight: "6px", width: "75%", display: "flex", justifyContent: "center" }}
+          style={{
+            paddingRight: "6px",
+            width: "75%",
+            display: "flex",
+            justifyContent: "center",
+          }}
         >
           <span
             style={{
@@ -64,29 +71,18 @@ export default function GameAndSidebar({ props }) {
                   : "var(--color--greyscale)",
             }}
           >
-            {`${
-              turnNumber == 0 ? white_player.username : black_player.username
-            }'s turn`}
+            {`${turnNumber == 0 ? whiteUsername : blackUsername}'s turn`}
           </span>
         </div>
         <div style={{ paddingLeft: "3px", width: "25%" }}></div>
       </PlayerTurnDiv>
       <RowDiv>
         <Game
-          game={game}
-          setGame={setGame}
-          cable={cable}
-          user={user}
-          white_player={white_player}
-          black_player={black_player}
+          gameInfo={gameInfo}
           setMoveList={setMoveList}
           setTurnNumber={setTurnNumber}
         />
-        <SideBar
-          white={white_player}
-          black={black_player}
-          moveList={moveList}
-        />
+        <SideBar white={white} black={black} moveList={moveList} />
       </RowDiv>
     </ColumnDiv>
   );

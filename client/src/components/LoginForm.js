@@ -1,6 +1,9 @@
-import { useState } from "react";
+import { useOutletContext } from "react-router-dom";
+import { useState, useContext } from "react";
 
-export default function LoginForm({setUser}) {
+export default function LoginForm() {
+  const { setUser } = useOutletContext();
+  const [errorText, setErrorText] = useState("");
   const [formData, setFormData] = useState({
     username: "",
     password: "",
@@ -16,8 +19,26 @@ export default function LoginForm({setUser}) {
       },
       body: JSON.stringify(formData),
     })
-      .then((res) => res.json())
-      .then((user) => setUser(user));
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+        return Promise.reject(res);
+      })
+      .then((user) => {
+        setUser(user);
+      })
+      .catch((res) => {
+        setErrorText(res.statusText);
+      });
+  };
+
+  const errorOutput = () => {
+    if (errorText === "Unauthorized") {
+      return "We couldn't find an account with that username or password.";
+    } else {
+      return "Hmm. Something went wrong.";
+    }
   };
 
   const handleChange = (e) => {
@@ -28,7 +49,8 @@ export default function LoginForm({setUser}) {
     });
   };
   return (
-    <div style={{ border: "2px solid lightblue", flex: "1" }}>
+    <div style={{ display: "flex", flexDirection: "column", height: "90%", width: "60%" }}>
+      <h2>Login!</h2>
       <form onSubmit={handleLogin}>
         <input
           type="text"
@@ -38,7 +60,9 @@ export default function LoginForm({setUser}) {
         />
         <input type="submit" value="submit" />
       </form>
-      <h2>Login!</h2>
+      {errorText ? (
+        <span style={{ display: "inline-block", color: "var(--color--white)", marginTop: "3vw", fontSize: "1vw"}}>{errorOutput()}</span>
+      ) : null}
     </div>
   );
 }

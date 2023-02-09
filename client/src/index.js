@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "normalize.css";
+import 'react-toastify/dist/ReactToastify.css';
 import "./App.css";
 import App from "./App";
 import AccountInformationPage from "./components/AccountInformationPage";
@@ -10,13 +11,11 @@ import GameHistoryPage from "./components/GameHistoryPage";
 import PlayPage from "./components/PlayPage";
 import ErrorPage from "./ErrorPage";
 import reportWebVitals from "./reportWebVitals";
-import { ToastContainer } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App style={{ width: "100%" }} />,
+    element: <App style={{ width: "100vw" }} />,
     errorElement: <ErrorPage />,
     children: [
       {
@@ -42,7 +41,6 @@ const router = createBrowserRouter([
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <ToastContainer autoClose={3000} />
     <RouterProvider router={router} />
   </React.StrictMode>
 );

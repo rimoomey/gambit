@@ -1,54 +1,42 @@
-import { Chess } from "chess.js";
 import styled from "styled-components";
 import "../App.css";
 import { useOutletContext } from "react-router-dom";
-import { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { createConsumer } from "@rails/actioncable";
+import { ToastContainer, toast } from "react-toastify";
 import GameAndSidebar from "./GameAndSidebar";
+import MatchMakingModal from "./MatchMakingModal";
+import SignInModal from "./SignInModal";
 
 const PageContainer = styled.div`
   height: 90%;
   display: flex;
   width: 100%;
-  background-color: var(--color--greyscale);
   justify-content: center;
   align-items: center;
 `;
 
-const FloatingNotice = styled.div`
-  display: flex;
-  flex-direction: column;
-  background-color: var(--color--vivid-red);
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  box-shadow: rgba(100, 100, 111, 0.3) 0px 7px 29px 0px;
-  border-radius: 10px;
-  width: 500px;
-  height: 500px;
-`;
+const WS_API = "ws://localhost:4000/cable";
+
+export const CableContext = React.createContext({
+  cable: null,
+  setCable: () => {},
+});
 
 export default function PlayPage() {
   const [matchStatus, setMatchStatus] = useState("");
-  const [white, setWhite] = useState({});
-  const [black, setBlack] = useState({});
-
-  const [game, setGame] = useState({
-    gameInfo: null,
-    board: null,
-  });
-
+  const [gameInfo, setGameInfo] = useState(null);
+  const [cable, setCable] = useState(null);
   const [channel, setChannel] = useState(null);
-  const [user] = useOutletContext();
 
-  const cable = createConsumer("ws://localhost:4000/cable");
+  const { user } = useOutletContext();
 
-  const createSubscription = (cable) => {
-    const matchMakingChannel = cable.subscriptions.create(
+  const createSubscription = (socket) => {
+    const matchMakingChannel = socket.subscriptions.create(
       { channel: "MatchMakingChannel", user_id: user.id },
       {
         connected: () => {
-          setMatchStatus("joined MatchMaking");
+          setMatchStatus("joined matchmaking");
         },
         received: (data) => {
           if (data.message) {
@@ -56,12 +44,10 @@ export default function PlayPage() {
           }
 
           if (data.game) {
-            console.log("fired received");
-            setWhite(data.white_user);
-            setBlack(data.black_user);
-            setGame({
-              gameInfo: data.game,
-              board: new Chess(),
+            setGameInfo({
+              gameData: data.game,
+              whiteUser: data.white_user,
+              blackUser: data.black_user,
             });
             setMatchStatus("playing");
           }
@@ -71,41 +57,68 @@ export default function PlayPage() {
         },
       }
     );
-    setChannel(matchMakingChannel);
-  };
-
-  const handleJoined = () => {
-    channel.joined();
+    return matchMakingChannel;
   };
 
   useEffect(() => {
-    const cable = createConsumer("ws://localhost:4000/cable");
-    createSubscription(cable);
-  }, []);
+    modals();
+  }, [user, cable, matchStatus]);
+
+  useEffect(() => {
+    if (user) {
+      setCable(createConsumer(WS_API));
+      toast.dismiss("sign-in-toast");
+    }
+  }, [user]);
+
+  useEffect(() => {
+    if (user && cable) {
+      const newChannel = createSubscription(cable);
+      setChannel(newChannel);
+    }
+  }, [cable]);
+
+  const displayModal = (modal, id) => {
+    toast(modal, {
+      toastId: id,
+      position: "top-center",
+      closeOnClick: false,
+      theme: "dark",
+      closeButton: false,
+    });
+  };
+
+  const isInWaitingRoom = () => {
+    console.log(matchStatus);
+    return (
+      matchStatus === "joined matchmaking" || matchStatus === "waiting for game"
+    );
+  };
+
+  const modals = () => {
+    if (gameInfo) {
+      toast.dismiss("matchmaking-toast");
+      return;
+    } else if (user) {
+      if (isInWaitingRoom()) {
+        displayModal(
+          <MatchMakingModal matchChannel={channel} />,
+          "matchmaking-toast"
+        );
+      }
+    } else {
+      displayModal(<SignInModal />, "sign-in-toast");
+    }
+  };
 
   return (
     <PageContainer>
-      {game.gameInfo ? (
-        <GameAndSidebar props={[game, setGame, user, cable, white, black]} />
-      ) : (
-        <FloatingNotice>
-          {matchStatus == "waiting for game" ? (
-            <div style={{ color: "var(--color--white)", margin: "5px", fontSize: "1.5vw" }}>
-              Searching for an opponent...
-            </div>
-          ) : (
-            <button
-              style={{ width: "20%", fontSize: "1vw" }}
-              onClick={() => {
-                handleJoined();
-              }}
-              className="notice-button"
-            >
-              Play Online
-            </button>
-          )}
-        </FloatingNotice>
-      )}
+      <CableContext.Provider value={{ cable, setCable }}>
+        <div>
+          {gameInfo ? <GameAndSidebar gameInfo={gameInfo} /> : null}
+          <ToastContainer autoClose={false} draggable={false} />
+        </div>
+      </CableContext.Provider>
     </PageContainer>
   );
 }

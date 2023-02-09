@@ -18,6 +18,6 @@ class SessionsController < ApplicationController
   private
 
   def authentication_failed
-    render json: {errors: "Username or password incorrect"}, status: :unauthorized
+    render json: {errors: ["Username or password incorrect"]}, status: :unauthorized
   end
 end

@@ -2,6 +2,32 @@
   box-sizing: border-box;
 }
 
+.Toastify__toast-container {
+  width: 500px;
+  height: 500px;
+}
+
+.Toastify__toast, .Toastify__toast-body {
+  height: 100%;
+}
+
+.Toastify__toast-container--top-center {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -35%);
+}
+
+.Toastify__toast-theme--dark {
+  background-color: var(--color--vivid-red);
+}
+
+.Toastify__toast-body > div:last-child {
+  word-break: break-word;
+  height: 100%;
+  width: 100%;
+}
+
 ul {
   margin-block-start: 0px;
   margin-block-end: 0px;
@@ -30,16 +56,16 @@ ul {
   background: #555; 
 }
 
-.home-link {
-  font-size: 8vh;
+#home-link {
+  font-size: 6vh;
 }
 
-.home-link:link, .home-link:visited {
+#home-link:link, .home-link:visited {
   text-decoration: none;
   color: var(--color--vivid-red)
 }
 
-.home-link:hover {
+#home-link:hover {
   text-decoration: underline;
   color: var(--color--greyscale)
 }
@@ -54,7 +80,7 @@ ul {
 }
 
 .main-nav-link:hover {
-  text-decoration: underline;
+  text-decoration: none;
   color: var(--color--greyscale)
 }
 
