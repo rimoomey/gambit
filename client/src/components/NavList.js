@@ -3,20 +3,27 @@ import styled from "styled-components";
 import "normalize.css";
 import "../App.css";
 
+const BackgroundStrip = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: white;
+  mix-blend-mode: screen;
+  width: 100%;
+`;
+
 const Header = styled.div`
-  position: fixed;
-  top: 0;
+  justify-self: flex-start;
+  height: 10%;
   display: flex;
   flex-direction: row;
   width: 100%;
-  padding: 2vh;
   align-items: center;
-  color: var(--color--vivid-red);
-  background-color: var(--color--white);
+  padding: 2vw 1vw;
+  color: black;
 `;
 
-const Logo = styled(NavLink)`
-  flex: 1 1 0;
+const HomeLink = styled(NavLink)`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -25,44 +32,45 @@ const Logo = styled(NavLink)`
 const Navigation = styled.ul`
   list-style-type: none;
   display: flex;
-  flex: 1 1 auto;
+  height: 100%;
   flex-wrap: wrap;
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
-  color: var(--color--vivid-red);
 `;
 
 export default function NavList() {
   return (
     <Header>
-      <Navigation>
-        <li>
-          <NavLink className="main-nav-link" to="/play">
-            play
-          </NavLink>
-        </li>
-        <li>
-          <NavLink className="main-nav-link" to="/friends">
-            friends
-          </NavLink>
-        </li>
-      </Navigation>
-      <Logo id="home-link" to="/">
-        gambit
-      </Logo>
-      <Navigation>
-        <li>
-          <NavLink className="main-nav-link" to="/previous-games">
-            game history
-          </NavLink>
-        </li>
-        <li>
-          <NavLink className="main-nav-link" to="/account">
-            account
-          </NavLink>
-        </li>
-      </Navigation>
+      <BackgroundStrip>
+        <Navigation className="main-nav">
+          <li>
+            <NavLink className="main-nav-link" to="/play">
+              play
+            </NavLink>
+          </li>
+          <li>
+            <NavLink className="main-nav-link" to="/friends">
+              friends
+            </NavLink>
+          </li>
+        </Navigation>
+        <HomeLink id="home-link" to="/home">
+          gambit
+        </HomeLink>
+        <Navigation className="main-nav">
+          <li>
+            <NavLink className="main-nav-link" to="/previous-games">
+              game history
+            </NavLink>
+          </li>
+          <li>
+            <NavLink className="main-nav-link" to="/account">
+              account
+            </NavLink>
+          </li>
+        </Navigation>
+      </BackgroundStrip>
     </Header>
   );
 }

@@ -21,7 +21,7 @@ export default function Game({ gameInfo, setMoveList, setTurnNumber }) {
 
   //speed up rerendering
   const [game, setGame] = useState({
-    gameData: null,
+    gameData: gameData,
     board: null,
   });
 

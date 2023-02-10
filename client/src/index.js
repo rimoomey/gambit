@@ -1,20 +1,17 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import "normalize.css";
-import 'react-toastify/dist/ReactToastify.css';
-import "./App.css";
 import App from "./App";
 import AccountInformationPage from "./components/AccountInformationPage";
 import FriendsPage from "./components/FriendsPage";
 import GameHistoryPage from "./components/GameHistoryPage";
+import HomePage from "./components/HomePage";
 import PlayPage from "./components/PlayPage";
 import ErrorPage from "./ErrorPage";
 import reportWebVitals from "./reportWebVitals";
 
 const router = createBrowserRouter([
   {
-    path: "/",
     element: <App style={{ width: "100vw" }} />,
     errorElement: <ErrorPage />,
     children: [
@@ -34,6 +31,10 @@ const router = createBrowserRouter([
         path: "/account",
         element: <AccountInformationPage />,
       },
+      {
+        path: "/",
+        element: <HomePage />
+      }
     ],
   },
 ]);

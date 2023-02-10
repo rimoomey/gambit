@@ -47,9 +47,9 @@ export default function GameAndSidebar({ gameInfo }) {
         <div
           style={{
             paddingRight: "6px",
-            width: "75%",
+            width: "100%",
             display: "flex",
-            justifyContent: "center",
+            justifyContent: "flex-start",
           }}
         >
           <span
@@ -57,6 +57,7 @@ export default function GameAndSidebar({ gameInfo }) {
               fontSize: "1.5vh",
               margin: "3px",
               padding: "3px",
+              borderRadius: "3px",
               border:
                 turnNumber == 0
                   ? "1px solid var(--color--white)"
@@ -74,7 +75,6 @@ export default function GameAndSidebar({ gameInfo }) {
             {`${turnNumber == 0 ? whiteUsername : blackUsername}'s turn`}
           </span>
         </div>
-        <div style={{ paddingLeft: "3px", width: "25%" }}></div>
       </PlayerTurnDiv>
       <RowDiv>
         <Game
