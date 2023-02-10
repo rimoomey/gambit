@@ -10,7 +10,7 @@ import { useState } from "react";
 const PageContainer = styled.div`
   width: 100%;
   display: flex;
-  height: 90%;
+  height: 88%;
   justify-content: center;
   align-items: center;
 `;
@@ -21,7 +21,7 @@ const HomeLayout = styled.div`
   flex-direction: column;
   justify-content: center;
   height: 100vh;
-  background-image: var(--gradient--blush-bordeaux);
+  background-image: var(--gradient--dark-blush-to-vivid-red);
 `;
 
 export default function App() {

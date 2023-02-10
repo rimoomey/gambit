@@ -9,66 +9,52 @@ const BackgroundStrip = styled.div`
   align-items: center;
   background-color: white;
   mix-blend-mode: screen;
+  padding: 1vw;
   width: 100%;
 `;
 
 const Header = styled.div`
-  justify-self: flex-start;
+  align-self: flex-start;
   height: 10%;
-  display: flex;
-  flex-direction: row;
   width: 100%;
-  align-items: center;
-  padding: 2vw 1vw;
-  color: black;
 `;
 
 const HomeLink = styled(NavLink)`
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  height: 100%;
+  flex: 2;
+  font-weight: 700;
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 1;
+  grid-row-end: 4;
+
 `;
 
 const Navigation = styled.ul`
   list-style-type: none;
-  display: flex;
+  display: grid;
+  grid-template-columns: 2vw 30vw 1fr 1fr 1fr 2vw;
+  grid-template-rows: 2vh 3vh 2vh;
   height: 100%;
-  flex-wrap: wrap;
-  flex-direction: row;
-  justify-content: space-around;
-  align-items: center;
-`;
+`
 
 export default function NavList() {
   return (
     <Header>
       <BackgroundStrip>
         <Navigation className="main-nav">
-          <li>
-            <NavLink className="main-nav-link" to="/play">
+          <HomeLink id="home-link" to="/home">
+            gambit
+          </HomeLink>
+            <NavLink className="main-nav-link" to="/play" style={{gridColumnStart:"3", gridColumnEnd:"4"}}>
               play
             </NavLink>
-          </li>
-          <li>
-            <NavLink className="main-nav-link" to="/friends">
+            <NavLink className="main-nav-link" to="/friends" style={{gridColumnStart:"4", gridColumnEnd:"5"}}>
               friends
             </NavLink>
-          </li>
-        </Navigation>
-        <HomeLink id="home-link" to="/home">
-          gambit
-        </HomeLink>
-        <Navigation className="main-nav">
-          <li>
-            <NavLink className="main-nav-link" to="/previous-games">
-              game history
-            </NavLink>
-          </li>
-          <li>
-            <NavLink className="main-nav-link" to="/account">
+            <NavLink className="main-nav-link" to="/account" style={{gridColumnStart:"5", gridColumnEnd:"6"}}>
               account
             </NavLink>
-          </li>
         </Navigation>
       </BackgroundStrip>
     </Header>
