@@ -103,9 +103,9 @@ export default function LoginForm() {
         </div>
         <input
           className="form-input"
-          type="text"
-          name="username"
-          value={formData.username}
+          type="password"
+          name="password"
+          value={formData.password}
           onChange={handleChange}
           style={{ marginBottom: "1vw" }}
         />

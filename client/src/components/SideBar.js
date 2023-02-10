@@ -1,6 +1,7 @@
 import UserCard from "./UserCard";
 import ChatBox from "./ChatBox";
 import styled from "styled-components";
+import { useOutletContext } from "react-router-dom";
 import "../App.css";
 
 const SideContent = styled.div`
@@ -15,6 +16,7 @@ const SideContent = styled.div`
 `;
 
 export default function SideBar({ white, black, moveList }) {
+  const { user } = useOutletContext();
   const MessageContainer = () => {
     return (
       <>
@@ -28,16 +30,11 @@ export default function SideBar({ white, black, moveList }) {
             alignItems: "center",
           }}
         >
-          <UserCard user={white}></UserCard>
-          <div
-            style={{
-              fontSize: "1vw",
-              color: "var(--color--white)",
-            }}
-          >
-            VS
-          </div>
-          <UserCard user={black}></UserCard>
+          {user.id === white.id ? (
+            <UserCard user={black}></UserCard>
+          ) : (
+            <UserCard user={white}></UserCard>
+          )}
         </div>
         <ChatBox moveList={moveList} />
       </>

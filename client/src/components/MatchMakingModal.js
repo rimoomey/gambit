@@ -5,7 +5,6 @@ import { useState } from "react";
 const FloatingNotice = styled.div`
   display: flex;
   flex-direction: column;
-  background-color: var(--color--vivid-red);
   justify-content: center;
   align-items: center;
   text-align: center;

@@ -25,52 +25,66 @@ export default function PlayPage() {
 
   const { user } = useOutletContext();
 
-  const createSubscription = (socket) => {
-    const matchMakingChannel = socket.subscriptions.create(
-      { channel: "MatchMakingChannel", user_id: user.id },
-      {
-        connected: () => {
-          setMatchStatus("joined matchmaking");
-        },
-        received: (data) => {
-          if (data.message) {
-            setMatchStatus(data.message);
-          }
-
-          if (data.game) {
-            setGameInfo({
-              gameData: data.game,
-              whiteUser: data.white_user,
-              blackUser: data.black_user,
-            });
-            setMatchStatus("playing");
-          }
-        },
-        joined: () => {
-          matchMakingChannel.perform("joined");
-        },
-      }
-    );
-    return matchMakingChannel;
-  };
-
-  useEffect(() => {
-    modals();
-  }, [user, cable, matchStatus, gameInfo]);
-
   useEffect(() => {
     if (user) {
-      setCable(createConsumer(WS_API));
       toast.dismiss("sign-in-toast");
+      setCable(createConsumer(WS_API));
     }
   }, [user]);
 
   useEffect(() => {
+    const createSubscription = (socket) => {
+      const matchMakingChannel = socket.subscriptions.create(
+        { channel: "MatchMakingChannel", user_id: user.id },
+        {
+          connected: () => {
+            setMatchStatus("joined matchmaking");
+          },
+          received: (data) => {
+            if (data.message) {
+              setMatchStatus(data.message);
+            }
+
+            if (data.game) {
+              setGameInfo({
+                gameData: data.game,
+                whiteUser: data.white_user,
+                blackUser: data.black_user,
+              });
+              setMatchStatus("playing");
+            }
+          },
+          joined: () => {
+            matchMakingChannel.perform("joined");
+          },
+        }
+      );
+      return matchMakingChannel;
+    };
     if (user && cable) {
       const newChannel = createSubscription(cable);
       setChannel(newChannel);
     }
-  }, [cable]);
+  }, [cable]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  useEffect(() => {
+    const modals = () => {
+      if (gameInfo.gameData) {
+        toast.dismiss("matchmaking-toast");
+        return;
+      } else if (user) {
+        if (isInWaitingRoom()) {
+          displayModal(
+            <MatchMakingModal matchChannel={channel} />,
+            "matchmaking-toast"
+          );
+        }
+      } else {
+        displayModal(<SignInModal />, "sign-in-toast");
+      }
+    };
+    modals();
+  }, [user, cable, matchStatus, gameInfo]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const displayModal = (modal, id) => {
     toast(modal, {
@@ -86,22 +100,6 @@ export default function PlayPage() {
     return (
       matchStatus === "joined matchmaking" || matchStatus === "waiting for game"
     );
-  };
-
-  const modals = () => {
-    if (gameInfo.gameData) {
-      toast.dismiss("matchmaking-toast");
-      return;
-    } else if (user) {
-      if (isInWaitingRoom()) {
-        displayModal(
-          <MatchMakingModal matchChannel={channel} />,
-          "matchmaking-toast"
-        );
-      }
-    } else {
-      displayModal(<SignInModal />, "sign-in-toast");
-    }
   };
 
   return (

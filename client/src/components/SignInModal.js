@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useOutletContext } from "react-router-dom";
 import LoginForm from "./LoginForm";
+import SignUpForm from "./SignUpForm";
 import styled from "styled-components";
 import "../App.css";
 
@@ -19,18 +20,12 @@ export default function SignInModal() {
   const [signup, setSignup] = useState(false);
   const [login, setLogin] = useState(false);
 
-  const handleClick = (e) => {
-    const variableName = e.target.value;
-    const methodName =
-      "set" + variableName[0].toUpperCase() + variableName.slice(1);
+  const handleLogin = (e) => {
+    setLogin(true)
+  };
 
-    const dynamicFunctions = {
-      setSignup: setSignup,
-      setLogin: setLogin,
-    };
-
-    const func = dynamicFunctions[methodName];
-    func(true);
+  const handleSignup = (e) => {
+    setSignup(true)
   };
 
   if (user) {
@@ -43,25 +38,27 @@ export default function SignInModal() {
         </FloatingNotice>
       );
     } else if (signup) {
-      return <LoginForm />;
+      return (
+        <FloatingNotice>
+          <SignUpForm />
+        </FloatingNotice>
+      );
     } else {
       return (
         <FloatingNotice>
           <div style={{ color: "white", margin: "5px", fontSize: "1.5vw" }}>
-            You must be signed in to view this page!
+            You must be signed in to view this page.
           </div>
           <div>
             <button
-              value="login"
               className="notice-button"
-              onClick={handleClick}
+              onClick={handleLogin}
             >
               Sign In
             </button>
             <button
-              value="signup"
               className="notice-button"
-              onClick={handleClick}
+              onClick={handleSignup}
             >
               Sign Up
             </button>

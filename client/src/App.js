@@ -19,7 +19,7 @@ const HomeLayout = styled.div`
   border-radius: 0px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   height: 100vh;
   background-image: var(--gradient--dark-blush-to-vivid-red);
 `;
@@ -29,7 +29,7 @@ export default function App() {
 
   return (
     <HomeLayout>
-      <NavList />
+      <NavList user={user} />
       <PageContainer>
         <Outlet context={{ user, setUser }} />
       </PageContainer>

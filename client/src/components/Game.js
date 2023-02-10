@@ -2,7 +2,7 @@ import { CableContext } from "./PlayPage";
 import { Chessboard } from "react-chessboard";
 import { Chess } from "chess.js";
 import { useEffect, useState, useContext } from "react";
-import  { useOutletContext } from "react-router-dom";
+import { useOutletContext } from "react-router-dom";
 import { toast } from "react-toastify";
 import "../App.css";
 import styled from "styled-components";
@@ -66,8 +66,8 @@ export default function Game({ gameInfo, setMoveList, setTurnNumber }) {
 
   function makeAMove(move) {
     const gameBoardCopy = new Chess(game.board.fen());
-    const result = gameBoardCopy.move(move);
-    if (result) {
+    try {
+      const result = gameBoardCopy.move(move);
       fetch(`http://localhost:4000/games/${game.gameData.id}/add_move`, {
         method: "POST",
         headers: {
@@ -81,8 +81,29 @@ export default function Game({ gameInfo, setMoveList, setTurnNumber }) {
           piece: result.piece,
         }),
       });
+      return result;
+    } catch (error) {
+      toast.error(
+        <div
+          style={{
+            width: "200px",
+            fontSize: "3vh",
+            backgroundColor: "white",
+            color: "black",
+            mixBlendMode: "screen",
+            alignSelf: "center",
+            justifySelf: "center",
+          }}
+        >
+          You can't make that move.
+        </div>,
+        {
+          id: "illegal-move-toast",
+          position: toast.POSITION.TOP_CENTER,
+          theme: "light",
+        }
+      );
     }
-    return result; // null if the move was illegal, the move object if the move was legal
   }
 
   function onDrop(sourceSquare, targetSquare) {
@@ -96,16 +117,35 @@ export default function Game({ gameInfo, setMoveList, setTurnNumber }) {
         promotion: "q", // always promote to a queen for example simplicity
       });
     } else {
-      toast.error("It's not your turn yet.", {
-        position: toast.POSITION.TOP_CENTER,
-      });
+      toast.error(
+        <div
+          style={{
+            width: "200px",
+            fontSize: "3vh",
+            backgroundColor: "white",
+            color: "black",
+            mixBlendMode: "screen",
+            alignSelf: "center",
+            justifySelf: "center",
+          }}
+        >
+          It's not your turn yet.
+        </div>,
+        {
+          id: "illegal-move-toast",
+          position: toast.POSITION.TOP_CENTER,
+          theme: "light",
+        }
+      );
     }
     return false;
   }
 
   return (
     <Board>
-      { game.board ? <Chessboard position={game.board.fen()} onPieceDrop={onDrop} /> : null }
+      {game.board ? (
+        <Chessboard position={game.board.fen()} onPieceDrop={onDrop} />
+      ) : null}
     </Board>
   );
 }

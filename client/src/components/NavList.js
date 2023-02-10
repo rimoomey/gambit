@@ -10,11 +10,11 @@ const BackgroundStrip = styled.div`
   background-color: white;
   mix-blend-mode: screen;
   padding: 1vw;
+  height: 100%;
   width: 100%;
 `;
 
 const Header = styled.div`
-  align-self: flex-start;
   height: 10%;
   width: 100%;
 `;
@@ -38,12 +38,13 @@ const Navigation = styled.ul`
   height: 100%;
 `
 
-export default function NavList() {
+export default function NavList({ user }) {
+
   return (
     <Header>
       <BackgroundStrip>
         <Navigation className="main-nav">
-          <HomeLink id="home-link" to="/home">
+          <HomeLink id="home-link" to="/">
             gambit
           </HomeLink>
             <NavLink className="main-nav-link" to="/play" style={{gridColumnStart:"3", gridColumnEnd:"4"}}>
@@ -53,7 +54,7 @@ export default function NavList() {
               friends
             </NavLink>
             <NavLink className="main-nav-link" to="/account" style={{gridColumnStart:"5", gridColumnEnd:"6"}}>
-              account
+              {user ? `${user.username}'s page` : "account"}
             </NavLink>
         </Navigation>
       </BackgroundStrip>

@@ -1,4 +1,3 @@
-import { useState } from "react";
 import "../App.css";
 import "normalize.css";
 
@@ -27,6 +26,9 @@ export default function ChatBox({ moveList }) {
           break;
         case "w":
           color = "White";
+          break;
+        default:
+          color = "";
       }
       var piece;
       switch (move.piece) {
@@ -48,6 +50,8 @@ export default function ChatBox({ moveList }) {
         case "k":
           piece = "King";
           break;
+        default:
+          piece = "";
       }
       return (
         <span key="4" style={{ display: "inline-block" }}>
@@ -70,7 +74,7 @@ export default function ChatBox({ moveList }) {
           overflowX: "hidden",
         }}
       >
-        <ul style={{height: "100%"}}>
+        <ul style={{ height: "100%" }}>
           {moveList.length
             ? [...moveList].reverse().map((move, i) => (
                 <>

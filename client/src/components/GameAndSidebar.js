@@ -59,20 +59,20 @@ export default function GameAndSidebar({ gameInfo }) {
               padding: "3px",
               borderRadius: "3px",
               border:
-                turnNumber == 0
+                turnNumber === 1
                   ? "1px solid var(--color--white)"
                   : "1px solid var(--color--greyscale)",
               color:
-                turnNumber == 0
+                turnNumber === 1
                   ? "var(--color--white)"
                   : "var(--color--greyscale)",
               backgroundColor:
-                turnNumber == 1
+                turnNumber === 0
                   ? "var(--color--white)"
                   : "var(--color--greyscale)",
             }}
           >
-            {`${turnNumber == 0 ? whiteUsername : blackUsername}'s turn`}
+            {`${turnNumber === 0 ? whiteUsername : blackUsername}'s turn`}
           </span>
         </div>
       </PlayerTurnDiv>

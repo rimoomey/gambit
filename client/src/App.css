@@ -34,7 +34,14 @@
   background-image: var(--gradient--vivid-cyan-blue-to-vivid-purple);
 }
 
+.Toastify__toast-theme--light {
+  background-color: none;
+  background-image: var(--gradient--luminous-vivid-amber-to-luminous-vivid-orange);
+}
+
 .Toastify__toast-body > div:last-child {
+  display: flex;
+  justify-content: center;
   word-break: break-word;
   height: 100%;
   width: 100%;

@@ -4,12 +4,11 @@ import "../App.css";
 const Card = styled.div`
   box-sizing: border-box;
   display: flex;
-  width: 35%;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
   background-color: var(--color--greyscale);
-  margin: 4px;
+  margin: 2px;
   padding: 2px;
   color: var(--color--white);
 `;
@@ -37,18 +36,19 @@ const Wrapper = styled.div`
 export default function UserCard({ user }) {
   return (
     <Card>
+      <span style={{alignSelf: "flex-start"}}>Opponent:</span>
       <img
         style={{
-          maxWidth: "80%",
+          maxWidth: "60%",
           maxHeight: "auto",
           marginBottom: "1vh",
-          border: "1px solid var(--color--white)",
+          border: "2px solid var(--color--white)",
           borderRadius: "50%",
         }}
         src={user.avatar}
         alt="John"
       />
-      <span style={{ fontSize: "1vw", color: "var(--color--white)" }}>
+      <span style={{ fontSize: "2vw", color: "var(--color--white)" }}>
         {user.username}
       </span>
       <Wrapper>
