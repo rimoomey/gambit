@@ -3,7 +3,6 @@ import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import App from "./App";
 import AccountInformationPage from "./components/AccountInformationPage";
-import FriendsPage from "./components/FriendsPage";
 import GameHistoryPage from "./components/GameHistoryPage";
 import HomePage from "./components/HomePage";
 import PlayPage from "./components/PlayPage";
@@ -18,10 +17,6 @@ const router = createBrowserRouter([
       {
         path: "/play",
         element: <PlayPage />,
-      },
-      {
-        path: "/friends",
-        element: <FriendsPage />,
       },
       {
         path: "/previous-games",

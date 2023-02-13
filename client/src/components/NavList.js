@@ -50,8 +50,8 @@ export default function NavList({ user }) {
             <NavLink className="main-nav-link" to="/play" style={{gridColumnStart:"3", gridColumnEnd:"4"}}>
               play
             </NavLink>
-            <NavLink className="main-nav-link" to="/friends" style={{gridColumnStart:"4", gridColumnEnd:"5"}}>
-              friends
+            <NavLink className="main-nav-link" to="/previous-games" style={{gridColumnStart:"4", gridColumnEnd:"5"}}>
+              game history
             </NavLink>
             <NavLink className="main-nav-link" to="/account" style={{gridColumnStart:"5", gridColumnEnd:"6"}}>
               {user ? `${user.username}'s page` : "account"}

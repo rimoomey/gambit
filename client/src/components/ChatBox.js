@@ -64,7 +64,7 @@ export default function ChatBox({ moveList }) {
   const mapMoves = () => {
     return (
       <div
-        className="move-list"
+        className="nested-scroll"
         style={{
           width: "100%",
           display: "flex",

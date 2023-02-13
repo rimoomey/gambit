@@ -28,7 +28,9 @@ export default function PlayPage() {
   useEffect(() => {
     if (user) {
       toast.dismiss("sign-in-toast");
-      setCable(createConsumer(WS_API));
+      if (!cable) {
+        setCable(createConsumer(WS_API));
+      }
     }
   }, [user]);
 

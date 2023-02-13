@@ -63,22 +63,22 @@ ul {
   padding-inline-start: 0px;
 }
 
-.move-list::-webkit-scrollbar {
-  width: 0px;
+.nested-scroll::-webkit-scrollbar {
+  width: 3px;
 }
 
 /* Track */
-.move-list::-webkit-scrollbar-track {
+.nested-scroll::-webkit-scrollbar-track {
   background: var(--color--white); 
 }
  
 /* Handle */
-.move-list::-webkit-scrollbar-thumb {
-  background: var(--color--pale-pink); 
+.nested-scroll::-webkit-scrollbar-thumb {
+  background: var(--color--pale-cyan-blue); 
 }
 
 /* Handle on hover */
-.move-list::-webkit-scrollbar-thumb:hover {
+.nested-scroll::-webkit-scrollbar-thumb:hover {
   background: #555; 
 }
 
