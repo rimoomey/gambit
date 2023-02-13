@@ -54,6 +54,7 @@ export default function PlayPage() {
                 blackUser: data.black_user,
               });
               setMatchStatus("playing");
+              matchMakingChannel.perform("unsubscribed");
             }
           },
           joined: () => {
@@ -115,7 +116,7 @@ export default function PlayPage() {
           alignItems: "center",
         }}
       >
-        {gameInfo.gameData ? <GameAndSidebar gameInfo={gameInfo} /> : null}
+        {gameInfo.gameData ? <GameAndSidebar gameInfo={gameInfo}/> : null}
         <ToastContainer autoClose={false} draggable={false} />
       </div>
     </CableContext.Provider>

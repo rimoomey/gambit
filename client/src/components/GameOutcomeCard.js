@@ -9,7 +9,7 @@ const OutcomeCard = styled.div`
   width: 200px;
   background: none;
   font-size: 1vw;
-  padding: 1px;
+  padding: 2px;
   border: 1px solid white;
 `;
 
@@ -32,9 +32,9 @@ export default function GameOutcomeCard({ gameData, listNumber }) {
         />
         <div style={{ paddingBottom: "2px" }}>
           {gameData.users[0].username +
-            " (w)" + '\u00A0' +
+            " (w) " + 
             gameData.users[1].username +
-            "(b)"}
+            " (b)"}
         </div>
       </div>
       <DetailsButton>Details</DetailsButton>

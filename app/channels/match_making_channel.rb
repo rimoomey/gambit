@@ -15,7 +15,9 @@ class MatchMakingChannel < ApplicationCable::Channel
     @@matches << user unless @@matches.include?(user)
     if @@matches.length == 2
       game = Game.create!(white_user: @@matches.first, black_user: @@matches.last)
-      ActionCable.server.broadcast "MatchMakingChannel", {game: game, white_user: white_user_info(game), black_user: black_user_info(game)}
+      @@matches.each do |user|
+        ActionCable.server.broadcast "matchmaking_#{user.id}", {game: game, white_user: white_user_info(game), black_user: black_user_info(game)}
+      end
     else
       ActionCable.server.broadcast "matchmaking_#{params[:user_id]}", {message: "waiting for game"}
     end

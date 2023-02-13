@@ -2,6 +2,7 @@ import Game from "./Game";
 import SideBar from "./SideBar";
 import { useState } from "react";
 import styled from "styled-components";
+import { Navigate } from "react-router-dom";
 
 const ColumnDiv = styled.div`
   display: flex;
@@ -40,8 +41,10 @@ export default function GameAndSidebar({ gameInfo }) {
   const [moveList, setMoveList] = useState([
     "White: " + whiteUsername + ",Black: " + blackUsername,
   ]);
+  const [gameOver, setGameOver] = useState(false);
 
   return (
+    <>{gameOver && <Navigate replace to="/previous-games" />}
     <ColumnDiv>
       <PlayerTurnDiv>
         <div
@@ -79,11 +82,12 @@ export default function GameAndSidebar({ gameInfo }) {
       <RowDiv>
         <Game
           gameInfo={gameInfo}
+          setGameOver={setGameOver}
           setMoveList={setMoveList}
           setTurnNumber={setTurnNumber}
         />
         <SideBar white={white} black={black} moveList={moveList} />
       </RowDiv>
-    </ColumnDiv>
+    </ColumnDiv></>
   );
 }

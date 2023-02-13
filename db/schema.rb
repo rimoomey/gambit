@@ -15,6 +15,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_06_191708) do
     t.integer "white_user_id"
     t.integer "black_user_id"
     t.string "fen"
+    t.string "outcome"
+    t.string "winner_username"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["black_user_id"], name: "index_games_on_black_user_id"

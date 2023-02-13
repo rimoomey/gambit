@@ -4,6 +4,8 @@ class CreateGames < ActiveRecord::Migration[7.0]
       t.references :white_user, foreign_key: false
       t.references :black_user, foreign_key: false
       t.string :fen
+      t.string :outcome
+      t.string :winner_username
 
       t.timestamps
     end

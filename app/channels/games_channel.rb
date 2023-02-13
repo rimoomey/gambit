@@ -3,4 +3,7 @@ class GamesChannel < ApplicationCable::Channel
     stream_from "GamesChannel"
     stream_from "game_channel_#{params[:user_id]}"
   end
+
+  def unsubscribed
+  end
 end
