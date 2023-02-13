@@ -26,12 +26,13 @@ const HomeLayout = styled.div`
 
 export default function App() {
   const [user, setUser] = useState(null);
+  const [gameHistory, setGameHistory] = useState([]);
 
   return (
     <HomeLayout>
       <NavList user={user} />
       <PageContainer>
-        <Outlet context={{ user, setUser }} />
+        <Outlet context={{ user, setUser, gameHistory, setGameHistory }} />
       </PageContainer>
     </HomeLayout>
   );

@@ -1,8 +1,7 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useOutletContext } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import SignInModal from "./SignInModal";
-import DetailsButton from "./DetailsButton";
 import GameOutcomeCard from "./GameOutcomeCard";
 import styled from "styled-components";
 import "normalize.css";
@@ -29,7 +28,16 @@ const CardDiv = styled.div`
 `;
 
 export default function GameHistoryPage() {
-  const { user } = useOutletContext();
+  const { user, gameHistory, setGameHistory } = useOutletContext();
+  const API = "http://localhost:4000/"
+
+  useEffect(() => {
+    if (user && !gameHistory.length > 0) {
+      fetch(API + `/users/${user.id}/games`)
+      .then(res => res.json())
+      .then(data => setGameHistory(data))
+    }
+  }, [user]);
 
   useEffect(() => {
     const displayModal = (modal, id) => {
@@ -48,6 +56,12 @@ export default function GameHistoryPage() {
       toast.dismiss("sign-in-toast");
     }
   }, [user]);
+
+  const makeCards = () => {
+    return gameHistory.map((game, i) => {
+      return <GameOutcomeCard key={game.id} listNumber={i} gameData={game}/>
+    })
+  }
 
   return (
     <PageContent className="nested-scroll">
@@ -70,15 +84,7 @@ export default function GameHistoryPage() {
             }}
           >
             <CardDiv>
-              <GameOutcomeCard key="1" listNumber="1"/>
-              <GameOutcomeCard key="2" listNumber="2"/>
-              <GameOutcomeCard key="3" listNumber="3"/>
-              <GameOutcomeCard key="4" listNumber="4"/>
-              <GameOutcomeCard key="5" listNumber="5"/>
-              <GameOutcomeCard key="6" listNumber="6"/>
-              <GameOutcomeCard key="7" listNumber="7"/>
-              <GameOutcomeCard key="8" listNumber="8"/>
-              <GameOutcomeCard key="9" listNumber="9"/>
+              {gameHistory ? makeCards() : null}
             </CardDiv>
           </div>
         </>

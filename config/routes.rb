@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
   resources :users, only: %i[index]
+  resources :users, only: %i[] do
+    resources :games, only: %i[index show]
+  end
   post "/signup", to: "users#create"
-  resources :games, only: %i[index create] do
+  resources :games, only: %i[index show]
+  resources :games, only: %i[] do
     post "/add_move", to: "games#add_move"
   end
   post "/login", to: "sessions#create"
