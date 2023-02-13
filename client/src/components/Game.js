@@ -38,29 +38,28 @@ export default function Game({ gameInfo, setMoveList, setTurnNumber }) {
     setMoveList(newList);
   };
 
-  const createSubscription = () => {
-    cable.subscriptions.create(
-      { channel: "GamesChannel", user_id: user.id },
-      {
-        connected: () => {
-          setGame({
-            gameData: gameData,
-            board: new Chess(),
-          });
-        },
-        received: (data) => {
-          const gameBoardCopy = new Chess(data.fen);
-          setGame({
-            gameData: game.gameData,
-            board: gameBoardCopy,
-          });
-          updateMoveList(data.moves);
-        },
-      }
-    );
-  };
-
   useEffect(() => {
+    const createSubscription = () => {
+      cable.subscriptions.create(
+        { channel: "GamesChannel", user_id: user.id },
+        {
+          connected: () => {
+            setGame({
+              gameData: gameData,
+              board: new Chess(),
+            });
+          },
+          received: (data) => {
+            const gameBoardCopy = new Chess(data.fen);
+            setGame({
+              gameData: game.gameData,
+              board: gameBoardCopy,
+            });
+            updateMoveList(data.moves);
+          },
+        }
+      );
+    };
     createSubscription();
   }, []);
 

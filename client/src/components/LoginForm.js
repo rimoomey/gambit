@@ -47,7 +47,7 @@ export default function LoginForm() {
 
   const errorOutput = () => {
     if (errorText === "Unauthorized") {
-      return "We couldn't find an account with that username or password.";
+      return "We couldn't find an account with that username and password.";
     } else {
       return "Hmm. Something went wrong.";
     }
@@ -55,9 +55,10 @@ export default function LoginForm() {
 
   const handleChange = (e) => {
     const value = e.target.value;
+    const name = e.target.name;
     setFormData({
-      username: value,
-      password: value,
+      ...formData,
+      [name]: value,
     });
   };
   return (
