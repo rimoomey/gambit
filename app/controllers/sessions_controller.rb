@@ -4,6 +4,7 @@ class SessionsController < ApplicationController
     if user&.authenticate(params[:password])
       created_jwt = issue_token({id: user.id})
       cookies.signed[:jwt] = {value: created_jwt, httponly: true}
+      session[:user_id] = user.id
       render json: user, status: :ok
     else
       authentication_failed
@@ -11,7 +12,8 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    cookies.signed[:jwt] = nil
+    cookies.delete :jwt
+    session.delete :user_id
     head :no_content
   end
 

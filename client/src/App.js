@@ -1,11 +1,11 @@
 import "normalize.css";
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 import React from "react";
 import NavList from "./components/NavList";
 import styled from "styled-components";
 import { Outlet } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const PageContainer = styled.div`
   width: 100%;
@@ -27,6 +27,17 @@ const HomeLayout = styled.div`
 export default function App() {
   const [user, setUser] = useState(null);
   const [gameHistory, setGameHistory] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:4000/me", {
+      mode: "cors",
+      credentials: "include",
+    }).then((res) => {
+      if (res.ok) {
+        res.json().then((user) => setUser(user));
+      }
+    });
+  }, []);
 
   return (
     <HomeLayout>

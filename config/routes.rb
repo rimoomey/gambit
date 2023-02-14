@@ -4,6 +4,7 @@ Rails.application.routes.draw do
     resources :games, only: %i[index show]
   end
   post "/signup", to: "users#create"
+  get "/me", to: "users#show"
   resources :games, only: %i[index show]
   resources :games, only: %i[] do
     post "/add_move", to: "games#add_move"
