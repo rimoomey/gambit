@@ -59,7 +59,7 @@ export default function GameHistoryPage() {
 
   const makeCards = () => {
     return gameHistory.map((game, i) => {
-      return <GameOutcomeCard key={game.id} listNumber={i} gameData={game}/>
+      return <GameOutcomeCard key={game.id} listNumber={i + 1} gameData={game}/>
     })
   }
 

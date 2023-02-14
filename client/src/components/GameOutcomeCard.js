@@ -24,20 +24,18 @@ export default function GameOutcomeCard({ gameData, listNumber }) {
         #{listNumber}
       </div>
       <div style={{display: "flex", flexDirection: "column"}}>
-        <div style={{ alignSelf: "flex-start", marginBottom: "2px" }}> Final position: </div>
+        <div style={{ alignSelf: "flex-start", marginBottom: "2px" }}> Final board position: </div>
         <img
           src={`https://fen2image.chessvision.ai/${gameFen}`}
           alt="game"
           style={{ width: "140px" }}
         />
         <div style={{ paddingBottom: "2px" }}>
-          {gameData.users[0].username +
-            " (w) " + 
-            gameData.users[1].username +
-            " (b)"}
+          <div>{gameData.outcome ? `Outcome: ${gameData.outcome}` : `Outcome: game incomplete`}</div>
+          <div>{gameData.winner_username && `Winner: ${gameData.winner_username}`}</div>
         </div>
       </div>
-      <DetailsButton>Details</DetailsButton>
+      <DetailsButton gameId={gameData.id} gameFen={gameFen}>Details</DetailsButton>
     </OutcomeCard>
   );
 }

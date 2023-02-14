@@ -5,9 +5,19 @@ class GamesController < ApplicationController
     if user
       games = Game.where(white_user_id: user.id)
       games = games.or(Game.where(black_user_id: user.id))
-      return render json: games, include: [:users], status: :ok
+      return render json: games, status: :ok
     end
     render json: Game.all, status: :ok
+  end
+
+  def show
+    game = Game.find_by(id: params[:id])
+
+    if game
+      render json: game, include: [:moves, :users], status: :ok
+    else
+      render json: {errors: ["Game not found"]}, status: :unprocessable_entity
+    end
   end
 
   def add_move
