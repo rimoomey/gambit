@@ -11,5 +11,6 @@ Rails.application.routes.draw do
     patch "/end_game", to: "games#end_game"
   end
   post "/login", to: "sessions#create"
+  delete "/logout", to: "sessions#destroy"
   mount ActionCable.server => "/cable"
 end

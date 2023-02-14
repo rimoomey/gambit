@@ -29,7 +29,7 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.permit(%i[id username password password_confirmation])
+    params.permit(%i[id username password password_confirmation avatar])
   end
 
   def error_messages(user)

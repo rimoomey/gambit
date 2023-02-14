@@ -41,7 +41,7 @@ export default function App() {
 
   return (
     <HomeLayout>
-      <NavList user={user} />
+      <NavList user={user} setUser={setUser}/>
       <PageContainer>
         <Outlet context={{ user, setUser, gameHistory, setGameHistory }} />
       </PageContainer>

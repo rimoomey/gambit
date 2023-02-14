@@ -36,7 +36,7 @@ const Wrapper = styled.div`
 export default function UserCard({ user }) {
   return (
     <Card>
-      <span style={{alignSelf: "flex-start"}}>Opponent:</span>
+      <span style={{ alignSelf: "flex-start" }}>Opponent:</span>
       <img
         style={{
           maxWidth: "60%",
@@ -45,7 +45,9 @@ export default function UserCard({ user }) {
           border: "2px solid var(--color--white)",
           borderRadius: "50%",
         }}
-        src={user.avatar}
+        src={
+          user.avatar ? user.avatar : `${process.env.PUBLIC_URL}/default.png`
+        }
         alt="John"
       />
       <span style={{ fontSize: "2vw", color: "var(--color--white)" }}>

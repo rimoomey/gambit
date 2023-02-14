@@ -21,24 +21,30 @@ const Header = styled.div`
 
 const HomeLink = styled(NavLink)`
   height: 100%;
-  flex: 2;
+  flex: 1;
   font-weight: 700;
   grid-column-start: 2;
   grid-column-end: 3;
   grid-row-start: 1;
   grid-row-end: 4;
-
 `;
 
 const Navigation = styled.ul`
   list-style-type: none;
-  display: grid;
-  grid-template-columns: 2vw 30vw 1fr 1fr 1fr 2vw;
-  grid-template-rows: 2vh 3vh 2vh;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
   height: 100%;
-`
+`;
 
-export default function NavList({ user }) {
+export default function NavList({ user, setUser }) {
+  const logout = () => {
+    fetch("http://localhost:4000/logout", {
+      method: "DELETE",
+      mode: "cors",
+      credentials: "include",
+    }).then(setUser(null));
+  };
 
   return (
     <Header>
@@ -47,15 +53,28 @@ export default function NavList({ user }) {
           <HomeLink id="home-link" to="/">
             gambit
           </HomeLink>
-            <NavLink className="main-nav-link" to="/play" style={{gridColumnStart:"3", gridColumnEnd:"4"}}>
+          <div style={{display: "flex", flexDirection: "row", justifyContent: "space-around", flex: "2"}}>
+            <NavLink className="main-nav-link" to="/play">
               play
             </NavLink>
-            <NavLink className="main-nav-link" to="/previous-games" style={{gridColumnStart:"4", gridColumnEnd:"5"}}>
+            <NavLink className="main-nav-link" to="/previous-games">
               game history
             </NavLink>
-            <NavLink className="main-nav-link" to="/account" style={{gridColumnStart:"5", gridColumnEnd:"6"}}>
+            <NavLink className="main-nav-link" to="/account">
               {user ? `${user.username}'s page` : "account"}
             </NavLink>
+            {user ? (
+              <button
+                className="main-nav-link"
+                style={{
+                  background: "none",
+                }}
+                onClick={logout}
+              >
+                logout
+              </button>
+            ) : null}
+          </div>
         </Navigation>
       </BackgroundStrip>
     </Header>

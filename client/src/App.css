@@ -97,7 +97,7 @@ ul {
 }
 
 .main-nav-link {
-  flex: 1;
+  /* flex: 1; */
   font-size: 3vh;
   color: black;
   grid-row-start: 2;
