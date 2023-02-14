@@ -1,1 +1,2 @@
-web: bundle exec rails server -p $PORT
+api: bundle exec rails server -p $PORT
+web: npm start --prefix client
