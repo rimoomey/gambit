@@ -11,9 +11,12 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[7.0].define(version: 2023_02_06_191708) do
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "games", force: :cascade do |t|
-    t.integer "white_user_id"
-    t.integer "black_user_id"
+    t.bigint "white_user_id"
+    t.bigint "black_user_id"
     t.string "fen"
     t.string "outcome"
     t.string "winner_username"
@@ -28,7 +31,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_06_191708) do
     t.string "from"
     t.string "color"
     t.string "piece"
-    t.integer "game_id"
+    t.bigint "game_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["game_id"], name: "index_moves_on_game_id"
