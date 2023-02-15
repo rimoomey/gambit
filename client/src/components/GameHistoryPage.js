@@ -83,7 +83,7 @@ export default function GameHistoryPage() {
             }}
           >
             <CardDiv>
-              {gameHistory ? makeCards() : null}
+              {gameHistory ? makeCards() : <div>No games to display...</div>}
             </CardDiv>
           </div>
         </>
