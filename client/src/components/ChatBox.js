@@ -74,7 +74,7 @@ export default function ChatBox({ moveList }) {
           overflowX: "hidden",
         }}
       >
-        <ul style={{ height: "100%" }}>
+        <ul>
           {moveList.length
             ? [...moveList].reverse().map((move, i) => (
                 <>

@@ -6,7 +6,7 @@ import "../App.css";
 
 const SideContent = styled.div`
   box-sizing: border-box;
-  height: 100%;
+  max-height: 100%;
   width: 25%;
   padding-left: 3px;
   display: flex;
