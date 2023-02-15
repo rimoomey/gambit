@@ -16,5 +16,5 @@ Rails.application.config.middleware.insert_before 0, Rack::Cors do
   end
 end
 
-Rails.application.config.hosts << "gambit.rimondevs.com"
-Rails.application.config.hosts << "gambit-backend-rimondevs.com"
+Rails.application.config.hosts << "https://gambit.rimondevs.com"
+Rails.application.config.hosts << "https://gambit-backend-rimondevs.com"
