@@ -148,7 +148,7 @@ export default function Game({ gameInfo, setGameOver, setMoveList, setTurnNumber
     const gameBoardCopy = new Chess(game.board.fen());
     try {
       const result = gameBoardCopy.move(move);
-      fetch(`${backendURL}/games/${game.gameData.id}/add_move`, {
+      fetch(`https://${backendURL}/games/${game.gameData.id}/add_move`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
