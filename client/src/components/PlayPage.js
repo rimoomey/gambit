@@ -6,8 +6,6 @@ import GameAndSidebar from "./GameAndSidebar";
 import MatchMakingModal from "./MatchMakingModal";
 import SignInModal from "./SignInModal";
 
-const WS_API = "ws://localhost:4000/cable";
-
 export const CableContext = React.createContext({
   cable: null,
   setCable: () => {},
@@ -23,13 +21,13 @@ export default function PlayPage() {
   const [cable, setCable] = useState(null);
   const [channel, setChannel] = useState(null);
 
-  const { user } = useOutletContext();
+  const { user, backendURL } = useOutletContext();
 
   useEffect(() => {
     if (user) {
       toast.dismiss("sign-in-toast");
       if (!cable) {
-        setCable(createConsumer(WS_API));
+        setCable(createConsumer(backendURL));
       }
     }
   }, [user]);

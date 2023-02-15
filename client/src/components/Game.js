@@ -17,7 +17,7 @@ const Board = styled.div`
 export default function Game({ gameInfo, setGameOver, setMoveList, setTurnNumber }) {
   const { gameData, whiteUser, blackUser } = gameInfo;
   const { cable } = useContext(CableContext);
-  const { user } = useOutletContext();
+  const { user, backendURL } = useOutletContext();
 
   //speed up rerendering
   const [game, setGame] = useState({
@@ -73,7 +73,7 @@ export default function Game({ gameInfo, setGameOver, setMoveList, setTurnNumber
     const outcome = gameOutcome(gameBoard);
     const winnerId = gameWinner(gameBoard);
 
-    fetch(`http://localhost:4000/games/${gameId}/end_game`, {
+    fetch(`${backendURL}games/${gameId}/end_game`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -148,7 +148,7 @@ export default function Game({ gameInfo, setGameOver, setMoveList, setTurnNumber
     const gameBoardCopy = new Chess(game.board.fen());
     try {
       const result = gameBoardCopy.move(move);
-      fetch(`http://localhost:4000/games/${game.gameData.id}/add_move`, {
+      fetch(`${backendURL}/games/${game.gameData.id}/add_move`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

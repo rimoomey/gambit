@@ -37,9 +37,9 @@ const Navigation = styled.ul`
   height: 100%;
 `;
 
-export default function NavList({ user, setUser }) {
+export default function NavList({ user, setUser, backendURL }) {
   const logout = () => {
-    fetch("http://localhost:4000/logout", {
+    fetch(`${backendURL}logout`, {
       method: "DELETE",
       mode: "cors",
       credentials: "include",

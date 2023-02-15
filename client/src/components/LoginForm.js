@@ -14,7 +14,7 @@ const FormTitle = styled.h2`
 `;
 
 export default function LoginForm() {
-  const { setUser } = useOutletContext();
+  const { setUser, backendURL } = useOutletContext();
   const [errorText, setErrorText] = useState("");
   const [formData, setFormData] = useState({
     username: "",
@@ -23,7 +23,7 @@ export default function LoginForm() {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    fetch("http://localhost:4000/login", {
+    fetch(`${backendURL}/login`, {
       method: "POST",
       credentials: "include",
       headers: {

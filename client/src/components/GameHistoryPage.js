@@ -28,12 +28,11 @@ const CardDiv = styled.div`
 `;
 
 export default function GameHistoryPage() {
-  const { user, gameHistory, setGameHistory } = useOutletContext();
-  const API = "http://localhost:4000/"
+  const { user, backendURL, gameHistory, setGameHistory } = useOutletContext();
 
   useEffect(() => {
     if (user && !gameHistory.length > 0) {
-      fetch(API + `/users/${user.id}/games`)
+      fetch(backendURL + `users/${user.id}/games`)
       .then(res => res.json())
       .then(data => setGameHistory(data))
     }

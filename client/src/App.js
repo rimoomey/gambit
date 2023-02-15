@@ -26,10 +26,11 @@ const HomeLayout = styled.div`
 
 export default function App() {
   const [user, setUser] = useState(null);
+  cosnt[(backendURL, setBackendURL)] = useState("164.92.86.90:80/");
   const [gameHistory, setGameHistory] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:4000/me", {
+    fetch(`${backendURL ? backendURL : "http://localhost:4000"}/me`, {
       mode: "cors",
       credentials: "include",
     }).then((res) => {
@@ -41,9 +42,9 @@ export default function App() {
 
   return (
     <HomeLayout>
-      <NavList user={user} setUser={setUser}/>
+      <NavList user={user} setUser={setUser} backendURL={backendURL}/>
       <PageContainer>
-        <Outlet context={{ user, setUser, gameHistory, setGameHistory }} />
+        <Outlet context={{ backendURL, user, setUser, gameHistory, setGameHistory }} />
       </PageContainer>
     </HomeLayout>
   );
