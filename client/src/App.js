@@ -26,11 +26,11 @@ const HomeLayout = styled.div`
 
 export default function App() {
   const [user, setUser] = useState(null);
-  const [backendURL, setBackendURL] = useState("164.92.86.90:80/");
+  const [backendURL, setBackendURL] = useState("https://164.92.86.90:80/");
   const [gameHistory, setGameHistory] = useState([]);
 
   useEffect(() => {
-    fetch(`${backendURL ? backendURL : "http://localhost:4000"}/me`, {
+    fetch(`${backendURL ? backendURL : "http://localhost:4000"}me`, {
       mode: "cors",
       credentials: "include",
     }).then((res) => {

@@ -14,7 +14,7 @@ const FormTitle = styled.h2`
 `;
 
 export default function SignUpForm() {
-  const { setUser } = useOutletContext();
+  const { setUser, backendURL } = useOutletContext();
   const [errors, setErrors] = useState([]);
   const [formData, setFormData] = useState({
     username: "",
@@ -24,7 +24,7 @@ export default function SignUpForm() {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    fetch(`${backendURL}/signup`, {
+    fetch(`${backendURL}signup`, {
       method: "POST",
       credentials: "include",
       headers: {
