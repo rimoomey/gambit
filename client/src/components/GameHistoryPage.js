@@ -18,7 +18,7 @@ const PageContent = styled.div`
 `;
 
 const CardDiv = styled.div`
-  width: 628px;
+  width: 1000px;
   gap: 10px;
   padding: 4px;
   display: flex;
