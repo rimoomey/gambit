@@ -8,7 +8,7 @@ const ColumnDiv = styled.div`
   display: flex;
   flex-direction: column;
   max-width: 90vh;
-  max-height: 800px;
+  max-height: 90%;
   background-color: var(--color--greyscale);
 `;
 

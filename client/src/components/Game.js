@@ -11,8 +11,7 @@ const Board = styled.div`
   box-sizing: border-box;
   border-right: 3px solid var(--color--vivid-red);
   padding-right: 3px;
-  height: 100%;
-  width: auto;
+  width: 75%;
 `;
 
 export default function Game({ gameInfo, setGameOver, setMoveList, setTurnNumber }) {
@@ -149,7 +148,7 @@ export default function Game({ gameInfo, setGameOver, setMoveList, setTurnNumber
     const gameBoardCopy = new Chess(game.board.fen());
     try {
       const result = gameBoardCopy.move(move);
-      fetch(`https://${backendURL}/games/${game.gameData.id}/add_move`, {
+      fetch(`${backendURL}/games/${game.gameData.id}/add_move`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

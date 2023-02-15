@@ -67,6 +67,7 @@ export default function ChatBox({ moveList }) {
         className="nested-scroll"
         style={{
           width: "100%",
+          maxHeight: "100%",
           display: "flex",
           flexDirection: "column",
           justifyContent: "flex-start",
