@@ -16,8 +16,6 @@ const PageContent = styled.div`
 export default function AccountInformationPage() {
   const { user } = useOutletContext();
 
-  console.log(user)
-
   useEffect(() => {
     const displayModal = (modal, id) => {
       toast(modal, {

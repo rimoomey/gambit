@@ -26,7 +26,7 @@ const HomeLayout = styled.div`
 
 export default function App() {
   const [user, setUser] = useState(null);
-  cosnt[(backendURL, setBackendURL)] = useState("164.92.86.90:80/");
+  const [backendURL, setBackendURL] = useState("164.92.86.90:80/");
   const [gameHistory, setGameHistory] = useState([]);
 
   useEffect(() => {
