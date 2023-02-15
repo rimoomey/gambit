@@ -114,7 +114,7 @@ export default function PlayPage() {
           alignItems: "center",
         }}
       >
-        {gameInfo.gameData ? <GameAndSidebar gameInfo={gameInfo}/> : null}
+        {user && gameInfo.gameData ? <GameAndSidebar gameInfo={gameInfo}/> : null}
         <ToastContainer autoClose={false} draggable={false} />
       </div>
     </CableContext.Provider>
