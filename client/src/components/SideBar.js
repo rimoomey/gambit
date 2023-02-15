@@ -11,7 +11,7 @@ const SideContent = styled.div`
   padding-left: 3px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
 `;
 
