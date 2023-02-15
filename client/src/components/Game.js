@@ -12,6 +12,7 @@ const Board = styled.div`
   border-right: 3px solid var(--color--vivid-red);
   padding-right: 3px;
   height: 100%;
+  width: auto;
 `;
 
 export default function Game({ gameInfo, setGameOver, setMoveList, setTurnNumber }) {
