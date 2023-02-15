@@ -23,7 +23,7 @@ export default function LoginForm() {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    fetch(`${backendURL}login`, {
+    fetch(`https://${backendURL}login`, {
       method: "POST",
       credentials: "include",
       headers: {

@@ -26,11 +26,11 @@ const HomeLayout = styled.div`
 
 export default function App() {
   const [user, setUser] = useState(null);
-  const [backendURL, setBackendURL] = useState("https://gambit-backend.rimondevs.com/");
+  const [backendURL, setBackendURL] = useState("gambit-backend.rimondevs.com/");
   const [gameHistory, setGameHistory] = useState([]);
 
   useEffect(() => {
-    fetch(`${backendURL ? backendURL : "http://localhost:4000"}me`, {
+    fetch(`https://${backendURL}me`, {
       mode: "cors",
       credentials: "include",
     }).then((res) => {

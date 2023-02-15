@@ -32,7 +32,7 @@ export default function GameHistoryPage() {
 
   useEffect(() => {
     if (user && !gameHistory.length > 0) {
-      fetch(backendURL + `users/${user.id}/games`)
+      fetch(`https://${backendURL}users/${user.id}/games`)
       .then(res => res.json())
       .then(data => setGameHistory(data))
     }

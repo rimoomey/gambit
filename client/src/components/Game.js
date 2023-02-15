@@ -73,7 +73,7 @@ export default function Game({ gameInfo, setGameOver, setMoveList, setTurnNumber
     const outcome = gameOutcome(gameBoard);
     const winnerId = gameWinner(gameBoard);
 
-    fetch(`${backendURL}games/${gameId}/end_game`, {
+    fetch(`https://${backendURL}games/${gameId}/end_game`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",

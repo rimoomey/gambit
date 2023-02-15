@@ -16,7 +16,7 @@ export default function DetailsButton({ gameId, gameFen }) {
   };
 
   const displayDetails = () => {
-    fetch(`${backendURL}games/${gameId}`).then((res) => {
+    fetch(`https://${backendURL}games/${gameId}`).then((res) => {
       if (res.ok) {
         res.json().then((game) => {
           console.log(game);

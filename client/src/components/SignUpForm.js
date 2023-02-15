@@ -24,7 +24,7 @@ export default function SignUpForm() {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    fetch(`${backendURL}signup`, {
+    fetch(`https://${backendURL}signup`, {
       method: "POST",
       credentials: "include",
       headers: {
