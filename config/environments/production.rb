@@ -67,6 +67,4 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   config.action_cable.allowed_request_origins = ["https://gambit.rimondevs.com"]
-
-  config.action_cable.url = "wss://gambit-backend.rimondevs.com/cable"
 end
