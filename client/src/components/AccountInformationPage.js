@@ -57,7 +57,7 @@ export default function AccountInformationPage() {
               padding: "20px",
             }}
           >
-            <img src={user.avatar} style={{width: "125px", border: "1px solid white", borderRadius: "50%"}}/>
+            <img src={user.avatar ? user.avatar : `${process.env.PUBLIC_URL}/default.png`} style={{width: "125px", border: "1px solid white", borderRadius: "50%"}}/>
             <div style={{color: "white"}}>{user.username}</div>
           </div>
         </>
