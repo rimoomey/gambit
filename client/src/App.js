@@ -26,7 +26,7 @@ const HomeLayout = styled.div`
 
 export default function App() {
   const [user, setUser] = useState(null);
-  const [backendURL, setBackendURL] = useState("http://164.92.86.90:80/");
+  const [backendURL, setBackendURL] = useState("https://gambit-backend.rimondevs.com/users");
   const [gameHistory, setGameHistory] = useState([]);
 
   useEffect(() => {
