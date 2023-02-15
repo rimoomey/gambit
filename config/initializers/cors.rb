@@ -15,6 +15,3 @@ Rails.application.config.middleware.insert_before 0, Rack::Cors do
       methods: [:get, :post, :put, :patch, :delete, :options, :head]
   end
 end
-
-# Rails.application.config.hosts << "gambit.rimondevs.com"
-# Rails.application.config.hosts << "gambit-backend-rimondevs.com"
