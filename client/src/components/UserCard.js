@@ -2,6 +2,7 @@ import styled from "styled-components";
 import "../App.css";
 
 const Card = styled.div`
+  max-height: 40%;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -36,7 +37,14 @@ const Wrapper = styled.div`
 export default function UserCard({ user }) {
   return (
     <Card>
-      <span style={{ alignSelf: "flex-start" }}>Opponent:</span>
+      <span
+        style={{
+          fontSize: "1.5vh",
+          margin: "2px",
+        }}
+      >
+        opponent:
+      </span>
       <img
         style={{
           maxWidth: "60%",
@@ -53,9 +61,9 @@ export default function UserCard({ user }) {
       <span style={{ fontSize: "2vw", color: "var(--color--white)" }}>
         {user.username}
       </span>
-      <Wrapper>
+      {/* <Wrapper>
         <Button>{user.username}'s page</Button>
-      </Wrapper>
+      </Wrapper> */}
     </Card>
   );
 }

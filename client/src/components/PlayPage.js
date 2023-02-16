@@ -27,7 +27,7 @@ export default function PlayPage() {
     if (user) {
       toast.dismiss("sign-in-toast");
       if (!cable) {
-        setCable(createConsumer(`wss://${backendURL}cable`));
+        setCable(createConsumer(`ws://${backendURL}cable`));
       }
     }
   }, [user]);

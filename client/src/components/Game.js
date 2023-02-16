@@ -73,7 +73,7 @@ export default function Game({ gameInfo, setGameOver, setMoveList, setTurnNumber
     const outcome = gameOutcome(gameBoard);
     const winnerId = gameWinner(gameBoard);
 
-    fetch(`https://${backendURL}games/${gameId}/end_game`, {
+    fetch(`http://${backendURL}games/${gameId}/end_game`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -148,7 +148,7 @@ export default function Game({ gameInfo, setGameOver, setMoveList, setTurnNumber
     const gameBoardCopy = new Chess(game.board.fen());
     try {
       const result = gameBoardCopy.move(move);
-      fetch(`https://${backendURL}/games/${game.gameData.id}/add_move`, {
+      fetch(`http://${backendURL}/games/${game.gameData.id}/add_move`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -39,7 +39,7 @@ const Navigation = styled.ul`
 
 export default function NavList({ user, setUser, backendURL }) {
   const logout = () => {
-    fetch(`https://${backendURL}logout`, {
+    fetch(`http://${backendURL}logout`, {
       method: "DELETE",
       mode: "cors",
       credentials: "include",
