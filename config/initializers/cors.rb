@@ -7,7 +7,7 @@
 
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
-    origins "http://localhost:3000", "68.97.193.164", "gambit-backend.rimondevs.com", "gambit-chess.vercel.app", "gambit-rimoomey.vercel.app", "gambit.rimondevs.com"
+    origins "http://localhost:3000", "http://localhost:3001", "68.97.193.164", "gambit-backend.rimondevs.com", "gambit-chess.vercel.app", "gambit-rimoomey.vercel.app", "gambit.rimondevs.com"
 
     resource "*",
       headers: :any,

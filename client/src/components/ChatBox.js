@@ -63,19 +63,7 @@ export default function ChatBox({ moveList }) {
 
   const mapMoves = () => {
     return (
-      <div
-        className="nested-scroll"
-        style={{
-          width: "100%",
-          maxHeight: "100%",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "flex-start",
-          overflowY: "scroll",
-          overflowX: "hidden",
-        }}
-      >
-        <ul>
+        <ul className="nested-scroll" style={{ height: "150px", overflowY: "scroll" }}>
           {moveList.length
             ? [...moveList].reverse().map((move, i) => (
                 <>
@@ -102,7 +90,6 @@ export default function ChatBox({ moveList }) {
               ))
             : null}
         </ul>
-      </div>
     );
   };
 
