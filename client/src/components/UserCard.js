@@ -61,9 +61,6 @@ export default function UserCard({ user }) {
       <span style={{ fontSize: "2vw", color: "var(--color--white)" }}>
         {user.username}
       </span>
-      {/* <Wrapper>
-        <Button>{user.username}'s page</Button>
-      </Wrapper> */}
     </Card>
   );
 }
